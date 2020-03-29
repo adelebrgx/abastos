@@ -6,6 +6,15 @@
       <title>Homepage</title>
     </head>
     <body>
+      <ul>
+        <li>
+          <form class="logout" action="/accounts/logout/" method="post">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+
+          </form>
+        </li>
+      </ul>
       <h1>Your registration was a success</h1>
 
 

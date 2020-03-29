@@ -14,8 +14,8 @@
         </form>
       </li>
     </ul>
-      <h1>Signup here</h1>
-      <form class="site-form" action="/accounts/signup/" method="post">
+      <h1>Log in</h1>
+      <form class="site-form" action="/accounts/login/" method="post">
         {% csrf_token %}
         {{form}}
         <input type="submit" value="Signup" />
