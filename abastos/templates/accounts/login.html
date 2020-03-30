@@ -1,19 +1,29 @@
+{% load static from staticfiles %}
 <!DOCTYPE html>
 
 <html>
     <head>
       <meta-charset="utf-8">
-      <title>Homepage</title>
+      <title>Login page</title>
+      <link href="https://fonts.googleapis.com/css?family=Montserrat:200display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href={% static 'styles.css' %} />
     </head>
-    <body><ul>
-      <li>
-        <form class="logout" action="/accounts/logout/" method="post">
-          {% csrf_token %}
-          <button type="submit">Logout</button>
+    <body>
 
-        </form>
-      </li>
-    </ul>
+      <div class="menu">
+        <ul>
+          <li><a href="default.asp" class="logo">AbastoSimple</a></li>
+          <li><a href="news.asp">Sell</a></li>
+          <li><a href="contact.asp">Buy</a></li>
+          <li style="float:right;"><a  href="about.asp"><form class="logout" action="/accounts/logout/" method="post">
+            {% csrf_token %}
+            <button class="logout" style="color:white; background-color:#ff5f3b; border:0; font-family:'Montserrat', sans-serif; font-size: 18px;" type="submit">Logout</button>
+
+          </form></a></li>
+        </ul>
+      </div>
+
       <h1>Log in</h1>
       <form class="site-form" action="/accounts/login/" method="post">
         {% csrf_token %}

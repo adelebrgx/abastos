@@ -11,13 +11,19 @@
       <title>Homepage</title>
     </head>
     <body>
+      <div class="menu">
+        <ul>
+          <li><a href="default.asp" class="logo">AbastoSimple</a></li>
+          <li><a href="news.asp">Sell</a></li>
+          <li><a href="contact.asp">Buy</a></li>
+          <li style="float:right;"><a  href="about.asp"><form class="logout" action="/accounts/logout/" method="post">
+            {% csrf_token %}
+            <button class="logout" style="color:white; background-color:#ff5f3b; border:0; font-family:'Montserrat', sans-serif; font-size: 18px;" type="submit">Logout</button>
 
-      <ul>
-        <li><a href="default.asp" class="logo">AbastoSimple</a></li>
-        <li><a href="news.asp">Sell</a></li>
-        <li><a href="contact.asp">Buy</a></li>
-        <li style="float:right;"><a  href="about.asp">Log Out</a></li>
-      </ul>
+          </form></a></li>
+        </ul>
+      </div>
+
       <div class="container" style="margin-top:2px;">
         <h1>AbastoSimple</h1>
 

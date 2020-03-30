@@ -37,7 +37,7 @@ img{
   padding-right:5px;
 }
 
-ul {
+.menu ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -45,20 +45,34 @@ ul {
   background-color: #ff5f3b;
 }
 
-li {
+.menu li {
   float: left;
   font-size: 18px;
 }
 
-li a {
+.menu li a {
   display: block;
   color: white;
   text-align: center;
   padding: 25px 24px;
   text-decoration: none;
 }
-
+form {
+  font-size: 22px;
+}
+ul {
+  list-style-type: none;
+}
+li {
+  padding-bottom: 10px;
+}
 /* Change the link color to #111 (black) on hover */
-li a:hover {
+.menu li a:hover {
   color: #0f1136;
+}
+
+input {
+  font-family: 'Montserrat', sans-serif;
+  border: none;
+  font-size: 22px;
 }
