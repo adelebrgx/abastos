@@ -37,7 +37,7 @@ def login_view(request):
 
 
             login(request,user)
-            return redirect('/accounts/success')
+            return redirect('/')
     else:
         form=AuthenticationForm()
     return render(request, 'accounts/login.html', {'form':form})

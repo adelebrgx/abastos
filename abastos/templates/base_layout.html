@@ -7,20 +7,31 @@
       <meta-charset="utf-8">
       <link href="https://fonts.googleapis.com/css?family=Montserrat:200display=swap" rel="stylesheet">
       <link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
       <link rel="stylesheet" href={% static 'styles.css' %} />
       <title>Homepage</title>
     </head>
     <body>
-      <div class="menu">
+        <div class="menu">
         <ul>
           <li><a href="/homepage" class="logo">AbastoSimple</a></li>
           <li><a href="/sell/sell-list">Sell</a></li>
           <li><a href="/buy/buy-list">Buy</a></li>
-          <li style="float:right;"><a  href="about.asp"><form class="logout" action="/accounts/logout/" method="post">
+          {% if user.is_authenticated %}
+
+
+
+          <li style="float:right; "><a  class="username" href="about.asp"><form class="logout" action="/accounts/logout/" method="post">
             {% csrf_token %}
+            <i class="fas fa-user"></i> <span  style="padding-right:20px;">{{user.username}}</span>
+
             <button class="logout" style="color:white; background-color:#ff5f3b; border:0; font-family:'Montserrat', sans-serif; font-size: 18px;" type="submit">Logout</button>
 
           </form></a></li>
+
+          {% else %}
+          <li style="float:right;"><a href="/accounts/login">Login</a></li>
+          {% endif %}
         </ul>
       </div>
       <div class="wrapper">
