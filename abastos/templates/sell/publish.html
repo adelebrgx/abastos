@@ -1,0 +1,19 @@
+{% extends 'base_layout.html'%}
+
+{% block content %}
+{% load static from staticfiles %}
+      <h1>Sell here</h1>
+
+      <h2> What do you want to sell? </h2>
+      <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="create" />
+      </form>
+
+
+
+
+
+      </div>
+{% endblock %}
