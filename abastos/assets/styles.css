@@ -30,6 +30,9 @@ h1 {
   color: #0f1136;
   font-family: 'Indie Flower', sans-serif;
 }
+h2 {
+    padding-top: 5%;
+}
 
 .logo{
   font-family: 'Indie Flower', sans-serif;
@@ -78,4 +81,10 @@ input {
   font-family: 'Montserrat', sans-serif;
   border: none;
   font-size: 22px;
+}
+
+#details {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  background-color: white;
 }
