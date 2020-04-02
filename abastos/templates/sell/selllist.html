@@ -3,10 +3,8 @@
 {% block content %}
 {% load static from staticfiles %}
       <h1>Sell here</h1>
-      <form action="/sell/publish/" method="post">
-        {% csrf_token %}
-        <button class="logout" style="color:white; background-color:#ff5f3b; border:0; font-family:'Montserrat', sans-serif; font-size: 18px;" type="submit">Publish here</button>
-      </form></a></li>
+      <button ><a style=" color:white; background-color:#ff5f3b; border:0; font-family:'Montserrat', sans-serif; font-size: 18px;" href="/sell/publish" >
+      Publish here </a></button>
       <h2> People are selling: </h2>
 
 
@@ -22,12 +20,14 @@
                     <img style="height:30px;" src="{{sellpair.product.url}}"/>
                   {{sellpair.product}}
                 </h2>
+                <h5>{{sellpair.sell.author}}</h5>
                 <h4>
                   Published: {{sellpair.sell.date}}
                 </h4>
                 <h3 style="color: #ff5f3b;">
                   Quantity : {{sellpair.quantity}}
                 </h3>
+                
                 <button id="details" style="font-family: 'Montserrat', sans-serif;font-size: 17px;background-color: green; color:white;margin-top: 3%; margin-bottom: 2%;"> View details</button>
               </div>
           </div>
