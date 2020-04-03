@@ -1,1 +1,8 @@
-ham: 
+ham: https://img.icons8.com/ios/50/000000/jamon.png
+eggs: https://img.icons8.com/metro/26/000000/eggs.png
+avocado: https://img.icons8.com/ios/50/000000/avocado.png
+milk: https://img.icons8.com/pastel-glyph/64/000000/milk-bottle.png
+jam: https://img.icons8.com/wired/64/000000/jam.png
+tomato: https://img.icons8.com/wired/64/000000/tomato.png
+citrus: https://img.icons8.com/wired/64/000000/tomato.png
+cheese: https://img.icons8.com/wired/64/000000/cheese.png

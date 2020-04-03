@@ -6,4 +6,4 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 def buy_list_view(request):
-    return render(request,'buy/buylist.html')
+    return render(request,'buy/buylist.html',{'user':request.user})

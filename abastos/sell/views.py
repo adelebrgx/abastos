@@ -46,4 +46,4 @@ def publish(request):
             return render(request, 'sell/selllist.html', {'sells':sells, 'sellpairs': sellPairs,'user':request.user})
     else:
         form=forms.CreateSell()
-    return render(request, 'sell/publish.html', {'form':form})
+    return render(request, 'sell/publish.html', {'form':form,'user':request.user})
