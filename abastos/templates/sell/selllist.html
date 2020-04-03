@@ -3,7 +3,7 @@
 {% block content %}
 {% load static from staticfiles %}
       <h1>Sell here</h1>
-      <button style="background-color:#ff5f3b; border:0; font-family:'Montserrat', sans-serif; font-size: 18px;color:orange;"><a  href="/sell/publish" >
+      <button style="background-color:#ff5f3b; border:0; font-family:'Montserrat', sans-serif; font-size: 25px;"><a  style="color:white; text-decoration:inherit;" href="/sell/publish" >
       Publish here </a></button>
       <h2> People are selling: </h2>
 
@@ -11,7 +11,7 @@
 
 
 
-      <div class="sellpairs">
+      <div class="sellpairs" >
         {% for sellpair in sellpairs %}
           <div class="sellpair">
               <div class="container" style="margin-top:30px;">

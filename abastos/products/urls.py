@@ -4,5 +4,6 @@ from . import views
 app_name='products'
 
 urlpatterns=[
-url(r'^products-list/$', views.products_list_view,name="products_list")
+url(r'^products-list/$', views.products_list_view,name="products_list"),
+url(r'^publish/$', views.publish,name="products_list"),
 ]

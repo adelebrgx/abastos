@@ -6,3 +6,4 @@ jam: https://img.icons8.com/wired/64/000000/jam.png
 tomato: https://img.icons8.com/wired/64/000000/tomato.png
 citrus: https://img.icons8.com/wired/64/000000/tomato.png
 cheese: https://img.icons8.com/wired/64/000000/cheese.png
+biscuits: https://img.icons8.com/wired/64/000000/biscuits.png
