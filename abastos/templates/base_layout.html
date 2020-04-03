@@ -20,13 +20,13 @@
           {% endif %}
           <li><a href="/sell/sell-list">Sell</a></li>
           <li><a href="/buy/buy-list">Buy</a></li>
+
+          <li><a href="/locations/locations-list">Locations</a></li>
+
+
+
+
           {% if user.is_authenticated %}
-          <li><a href="">My locations</a></li>
-
-
-
-
-
           <li style="float:right; "><a  class="username" href="about.asp"><form class="logout" action="/accounts/logout/" method="post">
             {% csrf_token %}
             <i class="fas fa-user"></i> <span  style="padding-right:20px;">{{user.username}}</span>

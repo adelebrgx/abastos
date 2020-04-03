@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^$', views.homepage),
     url(r'^homepage/', views.homepage),
     url(r'^products/', include('products.urls')),
+    url(r'^locations/', include('locations.urls')),
 ]
 
 urlpatterns+=staticfiles_urlpatterns()
