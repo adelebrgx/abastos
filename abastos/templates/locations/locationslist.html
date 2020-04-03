@@ -3,7 +3,9 @@
 {% block content %}
 {% load static from staticfiles %}
       <h1>Locations where to find your favorite products</h1>
-    
+
+      <button style="background-color:#ff5f3b; border:0; font-family:'Montserrat', sans-serif; font-size: 25px;"><a  style="color:white; text-decoration:inherit;" href="/locations/publish" >
+      Add new place </a></button>
 
       <div class="locations">
         {% for location in locations %}
