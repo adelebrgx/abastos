@@ -6,11 +6,12 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Sell, SellPair
 from products.models import Product
+from locations.models import Location
 from .import forms
 
 def sell_list_view(request):
     sellPairs=SellPair.objects.all().order_by('product')
-    print (sellPairs[0].sell.date)
+
     sells=Sell.objects.all().order_by('date')
     return render(request,'sell/selllist.html', {'sells':sells, 'sellpairs': sellPairs, 'user':request.user})
 
@@ -18,22 +19,26 @@ def sell_list_view(request):
 def publish(request):
     sellPairs=SellPair.objects.all().order_by('product')
     sells=Sell.objects.all().order_by('date')
+    user=request.user
     products=Product.objects.all().order_by('name')
+    locations=Location.objects.filter(owner=user)
     if request.method=="POST":
-        form=forms.CreateSell(request.POST, request.FILES)
-        if form.is_valid():
+
             user=request.user
-            quantity=request.POST['quantity']
-            product=request.POST['product']
-            #print(product)
-            sell=Sell.objects.create(author=user)
+            quantity=request.POST.get('quantity')
+            product=request.POST.get('product')
+            location_name=request.POST.get('location')
+            location=Location.objects.get(name=location_name)
+
+            print(location)
+            sell=Sell.objects.create(author=user,location=location)
             print(sell)
             #sell.save()
             #effective_product=Product.objects.create(name="unknown",url="unknown")
             for p in products:
                 print(p.id)
                 print(product)
-                if int(p.id)==int(product):
+                if p.name==product:
                     print("hello")
                     sellPair = SellPair.objects.create(sell=sell,quantity=quantity, product=p)
                     sellPair.save()
@@ -44,6 +49,5 @@ def publish(request):
             #
             #sellPair.save()
             return render(request, 'sell/selllist.html', {'sells':sells, 'sellpairs': sellPairs,'user':request.user})
-    else:
-        form=forms.CreateSell()
-    return render(request, 'sell/publish.html', {'form':form,'user':request.user})
+
+    return render(request, 'sell/publish.html', {'user':request.user, 'products': products, 'locations':locations})

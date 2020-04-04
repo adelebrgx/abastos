@@ -6,8 +6,26 @@
 
       <h2> What do you want to sell? </h2>
       <form action="/sell/publish/" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="length" value=8>
         {% csrf_token %}
-        {{ form }}
+        <label>Product</label>
+        <select id="cars" name="product">
+          {% for product in products %}
+            <option value="{{product.name}}">{{product.name}}</option>
+
+          {% endfor %}
+
+        </select>
+
+        <label>Quantity</label>
+        <input type="number" name="quantity">
+        <label>Location</label>
+        <select id="cars" name="location">
+          {% for location in locations %}
+            <option value="{{location.name}}">{{location.name}}</option>
+          {% endfor %}
+
+        </select>
         <input type="submit" value="Publish" />
       </form>
 
