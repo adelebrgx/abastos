@@ -11,6 +11,7 @@ class Location(models.Model):
     north_coordinate=models.FloatField()
     east_coordinate=models.FloatField()
     owner=models.ForeignKey(User)
+    slug=models.CharField(max_length=50, default="none")
 
     def __str__(self):
         return self.name

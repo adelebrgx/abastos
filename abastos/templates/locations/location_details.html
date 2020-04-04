@@ -1,0 +1,26 @@
+{% extends 'base_layout.html'%}
+
+{% block content %}
+{% load static from staticfiles %}
+      <h1>Details of the location</h1>
+
+
+      <form action="{% url 'locations:location_details' slug=location.slug %}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="length" value=8>
+        {% csrf_token %}
+        <label>Name</label>
+        <input type="text" name="name"  value="{{location.name}}">
+        <label>North coordinate</label>
+        <input type="number" step="0.01" name="north_coordinate"  value="{{location.north_coordinate}}">
+        <label>East coordinate</label>
+        <input type="number"  step="0.01" name="east_coordinate"  value="{{location.east_coordinate}}">
+        <input type="submit" value="Modify" />
+        </form>
+
+
+
+
+
+
+      </div>
+{% endblock %}
