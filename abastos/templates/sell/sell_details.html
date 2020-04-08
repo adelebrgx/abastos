@@ -7,22 +7,26 @@
       <button id="details" style="font-family: 'Montserrat', sans-serif;font-size: 20px;background-color: green; color:white; margin-bottom: 5%;">
       <a style="text-decoration:none; color:white;" href="/sell/sell-list"><i class="fas fa-arrow-circle-left"></i> Back to sells' list</a></button>
 
+      <div   style="background-color: #f0f0f0; margin-left:20%; font-size: 23px; margin-right:20%; padding-top:10px; padding-bottom:10px; margin-bottom: 3%; border:2px;">
+        <b>Published:</b> {{sellPair.product}} <br />
+        <b>Seller:</b> {{sellPair.quantity}} <br />
+
+        <b>Location:</b> {{sellPair.sell.location}}
+      </div>
 
 
+      {% if user == sellPair.sell.author %}
       <form method="post" enctype="multipart/form-data">
         <input type="hidden" name="length" value=8>
         {% csrf_token %}
-        <label>Actual product: {{sellPair.product}}</label><br />
         <label>Change product for </label>
         <select name="product" value="{{sellPair.product}}">
           {% for product in products %}
             <option value="{{product}}">{{product}}</option>
           {% endfor %}
-        </select><br />
-        <label>Actual quantity: {{sellPair.quantity}}</label><br />
+        </select>
         <label>Change quantity for: </label>
-        <input type="number" name="quantity" value="{{sellPair.quantity}}"><br />
-        <label>Actual quantity: {{sellPair.location}}</label><br />
+        <input type="number" name="quantity" value="{{sellPair.quantity}}">
         <label>Change location for </label>
         <select  name="location" value="{{sellPair.location}}">
           {% for location in locations %}
@@ -30,8 +34,12 @@
           {% endfor %}
 
         </select><br />
-        <input type="submit" value="Modify" />
+        <input style="margin-top: 3%;" type="submit" value="Modify" />
       </form>
+      {% endif %}
+
+
+
 
 
 
