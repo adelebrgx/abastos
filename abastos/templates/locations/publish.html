@@ -3,6 +3,9 @@
 {% block content %}
 {% load static from staticfiles %}
       <h1>Add a new place here:</h1>
+      <button id="details" style="font-family: 'Montserrat', sans-serif;font-size: 20px;background-color: green; color:white; margin-bottom: 5%;">
+      <a style="text-decoration:none; color:white;" href="/locations/locations-list"><i class="fas fa-arrow-circle-left"></i> Back to locations' list</a></button>
+
 
       <h2> What place do you want to add? </h2>
       <form action="/locations/publish/" method="post" enctype="multipart/form-data">
