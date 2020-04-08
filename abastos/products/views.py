@@ -3,12 +3,14 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render, redirect
 from .models import Product
+from sell.models import SellPair
 from .import forms
 from django.http import HttpResponse
 
 def products_list_view(request):
     products=Product.objects.all().order_by('name')
-    return render(request, "products/productslist.html",{'products':products} )
+    sellpairs=SellPair.objects.all().order_by('product')
+    return render(request, "products/productslist.html",{'products':products, 'sellpairs':sellpairs} )
 
 def publish(request):
     if request.method=="POST":
