@@ -35,7 +35,7 @@ def publish(request):
 
             sell=Sell.objects.create(author=user,location=location)
 
-            slug=product+"-"+quantity+"-"+str(sell.date)
+            slug=product+"-"+quantity
 
             sell.save()
 
@@ -54,3 +54,32 @@ def publish(request):
             return render(request, 'sell/selllist.html', {'sells':sells, 'sellpairs': sellPairs,'user':request.user})
 
     return render(request, 'sell/publish.html', {'user':request.user, 'products': products, 'locations':locations})
+
+def sell_details(request, slug):
+    sell= SellPair.objects.get(slug=slug)
+    sells=Sell.objects.all().order_by('name')
+    sellPairs= SellPair.objects.all().order_by('product')
+    user=request.user
+    locations=Location.objects.filter(owner=user)
+    products=Product.objects.all().order_by('name')
+    if request.method=="POST":
+        product_name=request.POST.get('product')
+        new_product= Product.objects.get(name=product_name)
+        location_name=request.POST.get('location')
+        new_location=Location.objects.get(name=location_name)
+        new_quantity=request.POST.get('quantity')
+        print(new_product)
+        print(new_location)
+        print(new_quantity)
+        print(sell.sell.location)
+        sell.product=new_product
+        sell.quantity=new_quantity
+        sell_associated=sell.sell
+        sell_associated.location=new_location
+        sell.save()
+        sell_associated.save()
+        #sell.product=new_product
+
+        return render(request, 'sell/selllist.html', {'sells':sells, 'sellpairs': sellPairs,'user':request.user})
+    print(sell)
+    return render(request, 'sell/sell_details.html',  {'user':user, 'sellPair':sell, 'locations':locations, 'products': products})

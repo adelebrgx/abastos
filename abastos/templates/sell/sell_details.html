@@ -1,0 +1,40 @@
+{% extends 'base_layout.html'%}
+
+{% block content %}
+{% load static from staticfiles %}
+      <h1>Details of the sell</h1>
+
+
+      <form method="post" enctype="multipart/form-data">
+        <input type="hidden" name="length" value=8>
+        {% csrf_token %}
+        <label>Actual product: {{sellPair.product}}</label><br />
+        <label>Change product for </label>
+        <select name="product" value="{{sellPair.product}}">
+          {% for product in products %}
+            <option value="{{product}}">{{product}}</option>
+          {% endfor %}
+        </select><br />
+        <label>Actual quantity: {{sellPair.quantity}}</label><br />
+        <label>Change quantity for: </label>
+        <input type="number" name="quantity" value="{{sellPair.quantity}}"><br />
+        <label>Actual quantity: {{sellPair.location}}</label><br />
+        <label>Change location for </label>
+        <select  name="location" value="{{sellPair.location}}">
+          {% for location in locations %}
+            <option value="{{location.name}}">{{location.name}}</option>
+          {% endfor %}
+
+        </select><br />
+        <input type="submit" value="Modify" />
+      </form>
+
+
+
+
+
+
+
+
+      </div>
+{% endblock %}

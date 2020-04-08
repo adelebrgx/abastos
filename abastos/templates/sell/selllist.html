@@ -38,7 +38,7 @@
                 <button id="details" onclick="myFunction({{sellpair.id}})" style="font-family: 'Montserrat', sans-serif;font-size: 17px;background-color: green; color:white;margin-top: 3%; margin-bottom: 2%;"> View details</button>
                 {% if user == sellpair.sell.author %}
                 <button id="details" style="font-family: 'Montserrat', sans-serif;font-size: 17px;background-color: orange; color:white;margin-top: 3%; margin-bottom: 2%;">
-                  Modify</button>
+                <a style="text-decoration:none; color:white;" href="{% url 'sell:sell_details' slug=sellpair.slug %}">Modify</a></button>
                 <button id="details" style="font-family: 'Montserrat', sans-serif;font-size: 17px;background-color: red; color:white;margin-top: 3%; margin-bottom: 2%;"> Delete</button>
 
                 {% endif %}
