@@ -3,13 +3,15 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render, redirect
 from .models import Location
+from sell.models import SellPair
 from . import forms
 from django.http import HttpResponse
 
 
 def locations_list_view(request):
+    sellpairs=SellPair.objects.all().order_by('product')
     locations=Location.objects.all().order_by('owner')
-    return render(request, "locations/locationslist.html", {'locations':locations} )
+    return render(request, "locations/locationslist.html", {'locations':locations, 'sellpairs':sellpairs} )
 
 def publish(request):
     if request.method=="POST":
