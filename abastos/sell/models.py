@@ -20,6 +20,7 @@ class SellPair(models.Model):
     sell=models.ForeignKey(Sell,on_delete=models.CASCADE)
     quantity=models.IntegerField()
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
+    slug=models.CharField(max_length=50, default="my-slug")
 
     def __str__(self):
         return self.product.name +" "+ str(self.quantity)

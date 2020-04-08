@@ -27,23 +27,26 @@ def publish(request):
             user=request.user
             quantity=request.POST.get('quantity')
             product=request.POST.get('product')
+
+
             location_name=request.POST.get('location')
             location=Location.objects.get(name=location_name)
 
-            print(location)
+
             sell=Sell.objects.create(author=user,location=location)
-            print(sell)
-            #sell.save()
-            #effective_product=Product.objects.create(name="unknown",url="unknown")
+
+            slug=product+"-"+quantity+"-"+str(sell.date)
+
+            sell.save()
+
             for p in products:
                 print(p.id)
                 print(product)
                 if p.name==product:
-                    print("hello")
-                    sellPair = SellPair.objects.create(sell=sell,quantity=quantity, product=p)
+
+                    sellPair = SellPair.objects.create(sell=sell,quantity=quantity, product=p, slug=slug)
                     sellPair.save()
-                    print(sellPair)
-                    print(sellPair.sell)
+
 
 
             #
