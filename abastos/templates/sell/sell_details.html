@@ -7,28 +7,29 @@
       <button id="details" style="font-family: 'Montserrat', sans-serif;font-size: 20px;background-color: green; color:white; margin-bottom: 5%;">
       <a style="text-decoration:none; color:white;" href="/sell/sell-list"><i class="fas fa-arrow-circle-left"></i> Back to sells' list</a></button>
 
-      <div   style="background-color: #f0f0f0; margin-left:20%; font-size: 23px; margin-right:20%; padding-top:10px; padding-bottom:10px; margin-bottom: 3%; border:2px;">
-        <b>Published:</b> {{sellPair.product}} <br />
-        <b>Seller:</b> {{sellPair.quantity}} <br />
-
-        <b>Location:</b> {{sellPair.sell.location}}
+      <div style="background-color: white; margin-left:20%; font-size: 23px; margin-right:20%; padding-top:10px; padding-bottom:10px; margin-bottom: 3%; border:2px;">
+        <b style="color: #ff5f3b;" >Product:</b> {{sellPair.product}} <br />
+        <b style="color: #ff5f3b;">Quantity:</b> {{sellPair.quantity}} <br />
+        <b style="color: #ff5f3b;">Seller</b> {{sellPair.sell.author}} <br />
+        <b style="color: #ff5f3b;">Location:</b> {{sellPair.sell.location}}
       </div>
 
 
+      <h3> Do you want to make changes ? </h3>
       {% if user == sellPair.sell.author %}
       <form method="post" enctype="multipart/form-data">
         <input type="hidden" name="length" value=8>
         {% csrf_token %}
-        <label>Change product for </label>
-        <select name="product" value="{{sellPair.product}}">
+        <label>Product: </label>
+        <select style="font-family:'Montserrat', sans-serif ;" name="product" value="{{sellPair.product}}">
           {% for product in products %}
             <option value="{{product}}">{{product}}</option>
           {% endfor %}
         </select>
-        <label>Change quantity for: </label>
+        <label>Quantity: </label>
         <input type="number" name="quantity" value="{{sellPair.quantity}}">
-        <label>Change location for </label>
-        <select  name="location" value="{{sellPair.location}}">
+        <label>Location:</label>
+        <select  style="font-family:'Montserrat', sans-serif ;" name="location" value="{{sellPair.location}}">
           {% for location in locations %}
             <option value="{{location.name}}">{{location.name}}</option>
           {% endfor %}

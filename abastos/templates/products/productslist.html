@@ -23,7 +23,7 @@
                     {% if sellpair.product == product %}
 
                       <li>
-                        <a style=" color: #616161; " href="{% url 'sell:sell_details' slug=sellpair.slug %}"><i style="color:#616161" class="fas fa-arrow-right"></i> {{sellpair.sell.author}} in {{sellpair.sell.location}}</a>
+                        <a id="ad" style=" color: #616161; " href="{% url 'sell:sell_details' slug=sellpair.slug  %}"><img style="height:15px;" src="{{product.url}}"/> {{sellpair.sell.author}} in {{sellpair.sell.location}}</a>
                       </li>
 
                     {% endif %}
@@ -33,7 +33,8 @@
                 <button id="details" onclick="myFunction({{product.id}})" style="font-family: 'Montserrat', sans-serif;font-size: 17px;background-color: green; color:white;margin-top: 3%; margin-bottom: 2%;"> View ads</button>
                 {% if user.is_superuser %}
                 <button id="details" style="font-family: 'Montserrat', sans-serif;font-size: 17px;background-color: orange; color:white;margin-top: 3%; margin-bottom: 2%;"> <a style="text-decoration:none; color:white;" href="{% url 'products:product_details' slug=product.name %}">Modify</a></button>
-                <button id="details" style="font-family: 'Montserrat', sans-serif;font-size: 17px;background-color: red; color:white;margin-top: 3%; margin-bottom: 2%;"> Delete</button>
+                <button id="details"  style="font-family: 'Montserrat', sans-serif;font-size: 17px;background-color: red; color:white;margin-top: 3%; margin-bottom: 2%;"> <a style="text-decoration:none; color:white;" href="{% url 'products:product_delete'  slug=product.name%}">Delete</a></button>
+
 
                 {% endif %}
 
@@ -64,6 +65,6 @@
         }
       }
 
-    
+
       </script>
 {% endblock %}

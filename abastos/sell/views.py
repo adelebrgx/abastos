@@ -56,6 +56,7 @@ def publish(request):
     return render(request, 'sell/publish.html', {'user':request.user, 'products': products, 'locations':locations})
 
 def sell_details(request, slug):
+
     sell= SellPair.objects.get(slug=slug)
     sells=Sell.objects.all().order_by('name')
     sellPairs= SellPair.objects.all().order_by('product')
