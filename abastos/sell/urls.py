@@ -7,4 +7,5 @@ urlpatterns=[
 url(r'^sell-list/$', views.sell_list_view,name="sell_list"),
 url(r'^publish/$', views.publish,name="publish"),
 url(r'^(?P<slug>[\w-]+)/$',views.sell_details, name="sell_details"),
+url(r'^delete/(?P<slug>[\w-]+)/$', views.sell_delete,name="sell_delete"),
 ]

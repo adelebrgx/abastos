@@ -11,7 +11,6 @@ from .import forms
 
 def sell_list_view(request):
     sellPairs=SellPair.objects.all().order_by('product')
-
     sells=Sell.objects.all().order_by('date')
     return render(request,'sell/selllist.html', {'sells':sells, 'sellpairs': sellPairs, 'user':request.user})
 
@@ -40,17 +39,12 @@ def publish(request):
             sell.save()
 
             for p in products:
-                print(p.id)
-                print(product)
+                #print(p.id)
+                #print(product)
                 if p.name==product:
 
                     sellPair = SellPair.objects.create(sell=sell,quantity=quantity, product=p, slug=slug)
                     sellPair.save()
-
-
-
-            #
-            #sellPair.save()
             return render(request, 'sell/selllist.html', {'sells':sells, 'sellpairs': sellPairs,'user':request.user})
 
     return render(request, 'sell/publish.html', {'user':request.user, 'products': products, 'locations':locations})
@@ -69,10 +63,10 @@ def sell_details(request, slug):
         location_name=request.POST.get('location')
         new_location=Location.objects.get(name=location_name)
         new_quantity=request.POST.get('quantity')
-        print(new_product)
-        print(new_location)
-        print(new_quantity)
-        print(sell.sell.location)
+        #print(new_product)
+        #print(new_location)
+        #print(new_quantity)
+        #print(sell.sell.location)
         sell.product=new_product
         sell.quantity=new_quantity
         sell_associated=sell.sell
@@ -82,5 +76,16 @@ def sell_details(request, slug):
         #sell.product=new_product
 
         return render(request, 'sell/selllist.html', {'sells':sells, 'sellpairs': sellPairs,'user':request.user})
-    print(sell)
+    #print(sell)
     return render(request, 'sell/sell_details.html',  {'user':user, 'sellPair':sell, 'locations':locations, 'products': products})
+
+
+def sell_delete(request,slug):
+    sellpair= SellPair.objects.get(slug=slug)
+
+    sellpairs_list=SellPair.objects.all().order_by('product')
+    print(sellpair)
+    sellpair.delete()
+    sells=Sell.objects.all().order_by('name')
+    user=request.user
+    return render(request, 'sell/selllist.html', {'sells':sells, 'sellpairs': sellpairs_list,'user':request.user})
