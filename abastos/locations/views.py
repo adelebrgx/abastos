@@ -14,6 +14,7 @@ def locations_list_view(request):
     return render(request, "locations/locationslist.html", {'locations':locations, 'sellpairs':sellpairs} )
 
 def publish(request):
+    sellpairs_list=SellPair.objects.all().order_by('product')
     if request.method=="POST":
         locations=Location.objects.all().order_by('owner')
         form=forms.CreateLocation(request.POST, request.FILES)
@@ -30,14 +31,15 @@ def publish(request):
             location=Location.objects.create(name=name, north_coordinate=north, east_coordinate=east, owner=owner)
             location.save()
 
-            return render(request, 'locations/locationslist.html', {'locations':locations,'user':request.user})
+            return render(request, 'locations/locationslist.html', {'locations':locations,'user':request.user, 'sellpairs':sellpairs_list})
     else:
         form=forms.CreateLocation()
-    return render(request, 'locations/publish.html', {'form':form,'user':request.user})
+    return render(request, 'locations/publish.html', {'form':form,'user':request.user, })
 
 def location_details(request, slug):
     locations=Location.objects.all().order_by('owner')
     user=request.user
+    sellpairs_list=SellPair.objects.all().order_by('product')
     location= Location.objects.get(slug=slug)
     print(location)
     if request.method=='POST':
@@ -48,5 +50,20 @@ def location_details(request, slug):
         location.north_coordinate=new_nc
         location.east_coordinate=new_ec
         location.save()
-        return render(request, 'locations/locationslist.html', {'user':user, 'locations':locations})
+        return render(request, 'locations/locationslist.html', {'user':user, 'locations':locations, 'sellpairs':sellpairs_list})
     return render(request, "locations/location_details.html", {'user':user, 'location':location})
+
+
+def location_delete(request,slug):
+    location= Location.objects.get(slug=slug)
+    sellpairs=SellPair.objects.all()
+
+    print(location)
+    for s in sellpairs:
+        if s.sell.location==location:
+            s.delete()
+    location.delete()
+    locations=Location.objects.all().order_by('owner')
+    user=request.user
+    sellpairs_list=SellPair.objects.all().order_by('product')
+    return render(request, 'locations/locationslist.html', {'locations':locations,'user':request.user, 'sellpairs':sellpairs_list})
