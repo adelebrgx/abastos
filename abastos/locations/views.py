@@ -28,7 +28,7 @@ def publish(request):
             print(north)
             print(east)
             owner=request.user
-            location=Location.objects.create(name=name, north_coordinate=north, east_coordinate=east, owner=owner)
+            location=Location.objects.create(name=name, north_coordinate=north, east_coordinate=east, owner=owner, slug=slug)
             location.save()
 
             return render(request, 'locations/locationslist.html', {'locations':locations,'user':request.user, 'sellpairs':sellpairs_list})
@@ -41,7 +41,7 @@ def location_details(request, slug):
     user=request.user
     sellpairs_list=SellPair.objects.all().order_by('product')
     location= Location.objects.get(slug=slug)
-    print(location)
+    print(slug)
     if request.method=='POST':
         new_name=request.POST.get("name")
         new_nc=request.POST.get("north_coordinate")

@@ -43,6 +43,7 @@ img{
 }
 .menu {
   overflow: hidden;
+  margin-bottom: 3%;
 }
 .menu ul {
   list-style-type: none;

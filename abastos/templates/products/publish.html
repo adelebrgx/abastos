@@ -2,16 +2,17 @@
 
 {% block content %}
 {% load static from staticfiles %}
-      <h1>Products sold on the platform</h1>
+    <button id="details" style="float:left; margin-left: 10%; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); font-family: 'Montserrat', sans-serif;font-size: 20px;background-color: green; color:white;">
+    <a style="text-decoration:none; color:white;" href="/products/products-list"><i class="fas fa-arrow-circle-left"></i> Back to products' list</a></button><br />
 
+      <h1>Add a new product here</h1>
 
-      <button id="details" style="font-family: 'Montserrat', sans-serif;font-size: 20px;background-color: green; color:white; margin-bottom: 5%;">
-      <a style="text-decoration:none; color:white;" href="/products/products-list"><i class="fas fa-arrow-circle-left"></i> Back to products' list</a></button>
-      <h2> What product do you want to add ? </h2>
+      <h2 style="margin-bottom: 3%;"> What product do you want to add ? </h2>
       <form action="/products/publish/" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
-        <input type="submit" value="Add" />
+        <br />
+        <input style="box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color: lightblue; color:white; margin-top:3%;" type="submit" value="Add a new product" />
       </form>
 
 
