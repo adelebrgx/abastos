@@ -41,7 +41,9 @@ h2 {
 img{
   padding-right:5px;
 }
-
+.menu {
+  overflow: hidden;
+}
 .menu ul {
   list-style-type: none;
   margin: 0;

@@ -25,23 +25,51 @@
 
 
 
+
           {% if user.is_authenticated %}
-          <li style="float:right; "><a  class="username" href="about.asp"><form class="logout" action="/accounts/logout/" method="post">
-            {% csrf_token %}
-            <i class="fas fa-user"></i> <span  style="padding-right:20px;">{{user.username}}</span>
+          <li style="margin-top: 24px;float:right; overflow: hidden;">
+            <div id="user" onmouseover="mouseover()" onmouseout="mouseout()" style="color:white;">
+              <i class="fas fa-user"></i> <span id="hey" style="padding-right:20px;">{{user.username}}</span>
+              <div style="height:20px;">
 
-            <button class="logout" style="color:white; background-color:#ff5f3b; border:0; font-family:'Montserrat', sans-serif; font-size: 18px;" type="submit">Logout</button>
+              </div>
 
-          </form></a></li>
+            </div>
+            <div id="dropdown-content" onmouseover="mouseover()" onmouseout="mouseout()" style="color:black; width:150px;  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); position: absolute; display:none; background-color:white;  ">
+              <a style="color:black;  float: none; display: block;" href="#">Link 1</a>
+              <a style="color:black; float: none; display: block;" href="#">Link 2</a>
+              <form class="logout" action="/accounts/logout/" method="post">
+                {% csrf_token %}
+              <button class="logout" style="color:red; border:0; font-family:'Montserrat', sans-serif; font-size: 18px; margin-bottom: 15%; margin-top: 15%;" type="submit"><i style="color:red;" class="fas fa-sign-out-alt"></i> Logout</button>
+
+            </form>
+            </div>
+
+            </li>
+
+
 
           {% else %}
           <li style="float:right;"><a href="/accounts/login">Login</a></li>
           {% endif %}
         </ul>
+
       </div>
       <div class="wrapper">
         {% block content %}
         {% endblock %}
       </div>
     </body>
+
+    <script>
+            function mouseover() {
+                document.getElementById("user").style.color = "#0f1136";
+                document.getElementById("dropdown-content").style.display = "block";
+            }
+
+            function mouseout() {
+                document.getElementById("user").style.color = "white";
+                document.getElementById("dropdown-content").style.display = "none";
+            }
+        </script>
     </html>
