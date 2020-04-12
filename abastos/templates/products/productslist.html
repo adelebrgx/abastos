@@ -3,7 +3,7 @@
 {% block content %}
 {% load static from staticfiles %}
       <h1>Products sold on the platform</h1>
-      <button style="margin-bottom:5%; background-color:#ff5f3b; border:0; font-family:'Montserrat', sans-serif; font-size: 25px;"><a  style="color:white; text-decoration:inherit;" href="/products/publish" >
+      <button style="box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); margin-bottom:5%; background-color:#ff5f3b; border:0; font-family:'Montserrat', sans-serif; font-size: 25px;"><a  style="color:white; text-decoration:inherit;" href="/products/publish" >
       Create new product </a></button>
 
 
@@ -22,18 +22,20 @@
                     {% for sellpair in sellpairs %}
                     {% if sellpair.product == product %}
 
-                      <li>
-                        <a id="ad" style=" color: #616161; " href="{% url 'sell:sell_details' slug=sellpair.slug  %}"><img style="height:15px;" src="{{product.url}}"/> {{sellpair.sell.author}} in {{sellpair.sell.location}}</a>
+                      <li style="background-color:white; margin-right:5%; padding-top:2%; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); margin-bottom:2%;">
+                        <b>{{sellpair.quantity}}</b> units of {{sellpair.product}}<br />
+                        <em><b>{{sellpair.sell.author}}</b> in <b>{{sellpair.sell.location}}</b></em> <br />
+                        <a id="ad" style=" color: #616161; " href="{% url 'sell:sell_details' slug=sellpair.slug  %}"> See details </a>
                       </li>
 
                     {% endif %}
                     {% endfor %}
                   </ul>
                 </div>
-                <button id="details" onclick="myFunction({{product.id}})" style="font-family: 'Montserrat', sans-serif;font-size: 17px;background-color: green; color:white;margin-top: 3%; margin-bottom: 2%;"> View ads</button>
+                <button id="details" onclick="myFunction({{product.id}})" style=" box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); font-family: 'Montserrat', sans-serif;font-size: 17px;background-color: green; color:white;margin-top: 3%; margin-bottom: 2%;"> View ads</button>
                 {% if user.is_superuser %}
-                <button id="details" style="font-family: 'Montserrat', sans-serif;font-size: 17px;background-color: orange; color:white;margin-top: 3%; margin-bottom: 2%;"> <a style="text-decoration:none; color:white;" href="{% url 'products:product_details' slug=product.name %}">Modify</a></button>
-                <button id="details"  style="font-family: 'Montserrat', sans-serif;font-size: 17px;background-color: red; color:white;margin-top: 3%; margin-bottom: 2%;"> <a style="text-decoration:none; color:white;" href="{% url 'products:product_delete'  slug=product.name%}">Delete</a></button>
+                <button id="details" style="box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); font-family: 'Montserrat', sans-serif;font-size: 17px;background-color: orange; color:white;margin-top: 3%; margin-bottom: 2%;"> <a style="text-decoration:none; color:white;" href="{% url 'products:product_details' slug=product.name %}">Modify</a></button>
+                <button id="details"  style="box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); font-family: 'Montserrat', sans-serif;font-size: 17px;background-color: red; color:white;margin-top: 3%; margin-bottom: 2%;"> <a style="text-decoration:none; color:white;" href="{% url 'products:product_delete'  slug=product.name%}">Delete</a></button>
 
 
                 {% endif %}

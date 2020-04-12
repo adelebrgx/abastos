@@ -4,10 +4,10 @@
 {% load static from staticfiles %}
       <h1>Details of the sell</h1>
 
-      <button id="details" style="font-family: 'Montserrat', sans-serif;font-size: 20px;background-color: green; color:white; margin-bottom: 5%;">
+      <button id="details" style=" box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); font-family: 'Montserrat', sans-serif;font-size: 20px;background-color: green; color:white; margin-bottom: 3%;">
       <a style="text-decoration:none; color:white;" href="/sell/sell-list"><i class="fas fa-arrow-circle-left"></i> Back to sells' list</a></button>
 
-      <div style="background-color: white; margin-left:20%; font-size: 23px; margin-right:20%; padding-top:10px; padding-bottom:10px; margin-bottom: 3%; border:2px;">
+      <div style="  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color: white; margin-left:20%; font-size: 23px; margin-right:20%; padding-top:10px; padding-bottom:10px; border:2px;">
         <b style="color: #ff5f3b;" >Product:</b> {{sellPair.product}} <br />
         <b style="color: #ff5f3b;">Quantity:</b> {{sellPair.quantity}} <br />
         <b style="color: #ff5f3b;">Seller</b> {{sellPair.sell.author}} <br />
@@ -15,27 +15,28 @@
       </div>
 
 
-      <h3> Do you want to make changes ? </h3>
+
       {% if user == sellPair.sell.author %}
+      <h2 style="margin-bottom:2%;"> Do you want to make changes ? </h2>
       <form method="post" enctype="multipart/form-data">
         <input type="hidden" name="length" value=8>
         {% csrf_token %}
-        <label>Product: </label>
-        <select style="font-family:'Montserrat', sans-serif ;" name="product" value="{{sellPair.product}}">
+        <label><b>Product:</b> </label>
+        <select style="font-size:18px; font-family:'Montserrat', sans-serif ;" name="product" value="{{sellPair.product}}">
           {% for product in products %}
             <option value="{{product}}">{{product}}</option>
           {% endfor %}
         </select>
-        <label>Quantity: </label>
+        <label><b>Quantity:</b> </label>
         <input type="number" name="quantity" value="{{sellPair.quantity}}">
-        <label>Location:</label>
-        <select  style="font-family:'Montserrat', sans-serif ;" name="location" value="{{sellPair.location}}">
+        <label><b>Location:</b></label>
+        <select  style="font-size:18px; font-family:'Montserrat', sans-serif ;" name="location" value="{{sellPair.location}}">
           {% for location in locations %}
             <option value="{{location.name}}">{{location.name}}</option>
           {% endfor %}
 
         </select><br />
-        <input style="margin-top: 3%;" type="submit" value="Modify" />
+        <input style="margin-top: 3%; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color:orange; color:white;" type="submit" value="Modify" />
       </form>
       {% endif %}
 
