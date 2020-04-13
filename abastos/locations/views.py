@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .models import Location
 from sell.models import SellPair
@@ -13,6 +13,7 @@ def locations_list_view(request):
     locations=Location.objects.all().order_by('owner')
     return render(request, "locations/locationslist.html", {'locations':locations, 'sellpairs':sellpairs} )
 
+@login_required(login_url="/accounts/login/")
 def publish(request):
     sellpairs_list=SellPair.objects.all().order_by('product')
     if request.method=="POST":

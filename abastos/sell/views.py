@@ -49,14 +49,21 @@ def publish(request):
 
     return render(request, 'sell/publish.html', {'user':request.user, 'products': products, 'locations':locations})
 
+
 def sell_details(request, slug):
 
     sell= SellPair.objects.get(slug=slug)
     sells=Sell.objects.all().order_by('name')
     sellPairs= SellPair.objects.all().order_by('product')
     user=request.user
-    locations=Location.objects.filter(owner=user)
+    if user.is_anonymous():
+        print("anonymous")
+        locations=None
+
+    else:
+        locations=Location.objects.filter(owner=user)
     products=Product.objects.all().order_by('name')
+
     if request.method=="POST":
         product_name=request.POST.get('product')
         new_product= Product.objects.get(name=product_name)
