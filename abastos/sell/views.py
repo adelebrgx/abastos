@@ -11,8 +11,25 @@ from .import forms
 
 def sell_list_view(request):
     sellPairs=SellPair.objects.all().order_by('product')
+    sells=Sell.objects.all().order_by('author')
+    return render(request,'sell/selllist.html', {'sells':sells, 'sellpairs': sellPairs, 'user':request.user})
+
+def sell_list_by_date(request):
+    sellPairs=SellPair.objects.all().order_by('sell__date')
     sells=Sell.objects.all().order_by('date')
     return render(request,'sell/selllist.html', {'sells':sells, 'sellpairs': sellPairs, 'user':request.user})
+
+def sell_list_by_location(request):
+    sellPairs=SellPair.objects.all().order_by('sell__location')
+    sells=Sell.objects.all().order_by('date')
+    return render(request,'sell/selllist.html', {'sells':sells, 'sellpairs': sellPairs, 'user':request.user})
+
+
+def sell_list_by_author(request):
+    sellPairs=SellPair.objects.all().order_by('sell__author')
+    sells=Sell.objects.all().order_by('date')
+    return render(request,'sell/selllist.html', {'sells':sells, 'sellpairs': sellPairs, 'user':request.user})
+
 
 @login_required(login_url="/accounts/login/")
 def publish(request):
@@ -85,6 +102,7 @@ def sell_details(request, slug):
         return render(request, 'sell/selllist.html', {'sells':sells, 'sellpairs': sellPairs,'user':request.user})
     #print(sell)
     return render(request, 'sell/sell_details.html',  {'user':user, 'sellPair':sell, 'locations':locations, 'products': products})
+
 
 
 def sell_delete(request,slug):
