@@ -44,24 +44,59 @@ def publish(request):
             quantity=request.POST.get('quantity')
             product=request.POST.get('product')
 
-
             location_name=request.POST.get('location')
             location=Location.objects.get(name=location_name)
-
-
             sell=Sell.objects.create(author=user,location=location)
-
-            slug=product+"-"+quantity
 
             sell.save()
 
+            slug=product+"-"+quantity
             for p in products:
-                #print(p.id)
-                #print(product)
                 if p.name==product:
-
                     sellPair = SellPair.objects.create(sell=sell,quantity=quantity, product=p, slug=slug)
                     sellPair.save()
+
+            if str(request.POST.get('quantity-1'))!="":
+                quantity1=request.POST.get('quantity-1')
+                product1=request.POST.get('product-1')
+                slug1=product1+"-"+quantity1
+                print(slug1)
+                for p in products:
+                    if p.name==product1:
+                        sellPair1 = SellPair.objects.create(sell=sell,quantity=quantity1, product=p, slug=slug1)
+                        sellPair1.save()
+            if str(request.POST.get('quantity-2'))!="":
+                quantity2=request.POST.get('quantity-2')
+                product2=request.POST.get('product-2')
+                slug2=product2+"-"+quantity2
+                print(slug2)
+                for p in products:
+                    if p.name==product2:
+                        sellPair2 = SellPair.objects.create(sell=sell,quantity=quantity2, product=p, slug=slug2)
+                        sellPair2.save()
+            if str(request.POST.get('quantity-3'))!="":
+                quantity3=request.POST.get('quantity-3')
+                product3=request.POST.get('product-3')
+                slug3=product3+"-"+quantity3
+                print(slug3)
+                for p in products:
+                    if p.name==product3:
+                        sellPair3 = SellPair.objects.create(sell=sell,quantity=quantity3, product=p, slug=slug3)
+                        sellPair3.save()
+            if str(request.POST.get('quantity-4'))!="":
+                quantity4=request.POST.get('quantity-4')
+                product4=request.POST.get('product-4')
+                slug4=product4+"-"+quantity4
+                print(slug4)
+                for p in products:
+                    if p.name==product4:
+                        sellPair4 = SellPair.objects.create(sell=sell,quantity=quantity4, product=p, slug=slug4)
+                        sellPair4.save()
+
+
+
+
+
             return render(request, 'sell/selllist.html', {'sells':sells, 'sellpairs': sellPairs,'user':request.user})
 
     return render(request, 'sell/publish.html', {'user':request.user, 'products': products, 'locations':locations})

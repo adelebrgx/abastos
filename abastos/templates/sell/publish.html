@@ -12,31 +12,103 @@
       <form action="/sell/publish/" method="post" enctype="multipart/form-data">
         <input type="hidden" name="length" value=8>
         {% csrf_token %}
-        <label><b>Product</b></label>
-        <select id="cars" style="font-size:20px; font-family: 'Montserrat', sans-serif;" name="product">
-          {% for product in products %}
-            <option value="{{product.name}}">{{product.name}}</option>
-
-          {% endfor %}
-
-        </select>
-
-        <label><b>Quantity</b></label>
-        <input type="number" name="quantity">
         <label><b>Location</b></label>
         <select style="font-size:20px; font-family: 'Montserrat', sans-serif;" id="cars" name="location">
           {% for location in locations %}
             <option  value="{{location.name}}">{{location.name}}</option>
           {% endfor %}
-
         </select>
-        <br />
+        <br /><br />
+        <div id="product-1">
+          <label><b>Product</b></label>
+          <select id="cars" style="font-size:20px; font-family: 'Montserrat', sans-serif;" name="product">
+            {% for product in products %}
+              <option value="{{product.name}}">{{product.name}}</option>
+            {% endfor %}
+          </select>
+          <label><b>Quantity</b></label>
+          <input type="number" name="quantity">
+          <br />
+        </div><br />
+
+        <div id="product-2" style="display:none;">
+          <label><b>Product</b></label>
+          <select id="cars" style="font-size:20px; font-family: 'Montserrat', sans-serif;" name="product-1">
+            {% for product in products %}
+              <option value="{{product.name}}">{{product.name}}</option>
+            {% endfor %}
+          </select>
+          <label><b>Quantity</b></label>
+          <input type="number" name="quantity-1">
+          <br />
+        </div><br />
+
+        <div id="product-3" style="display:none;">
+          <label><b>Product</b></label>
+          <select id="cars" style="font-size:20px; font-family: 'Montserrat', sans-serif;" name="product-2">
+            {% for product in products %}
+              <option value="{{product.name}}">{{product.name}}</option>
+            {% endfor %}
+          </select>
+          <label><b>Quantity</b></label>
+          <input type="number" name="quantity-2">
+          <br />
+        </div><br />
+
+
+        <div id="product-4" style="display:none;">
+          <label><b>Product</b></label>
+          <select id="cars" style="font-size:20px; font-family: 'Montserrat', sans-serif;" name="product-3">
+            {% for product in products %}
+              <option value="{{product.name}}">{{product.name}}</option>
+            {% endfor %}
+          </select>
+          <label><b>Quantity</b></label>
+          <input type="number" name="quantity-3">
+          <br />
+        </div><br />
+
+        <div id="product-5" style="display:none;">
+          <label><b>Product</b></label>
+          <select id="cars" style="font-size:20px; font-family: 'Montserrat', sans-serif;" name="product-4">
+            {% for product in products %}
+              <option value="{{product.name}}">{{product.name}}</option>
+            {% endfor %}
+          </select>
+          <label><b>Quantity</b></label>
+          <input type="number" name="quantity-4">
+          <br />
+        </div><br />
+
         <input type="submit" style="font-size: 25px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color: lightblue; color:white; margin-top:3%;" value="Publish ad" />
-      </form>
-
-
-
+      </form> <br />
+      <b style="font-size: 30px;">OR</b><br />
+      <button id="add" onclick="changeContent()" style="font-size: 25px; font-family: 'Montserrat', sans-serif; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color: lightpink; color:white; margin-top:1%;">Sell other product</button><br />
 
 
       </div>
+
+
+      <script>
+
+      var click=0;
+
+        function changeContent(){
+          click+=1;
+          if(click==1){
+            document.getElementById("product-2").style.display="block";
+          }
+          if(click==2){
+            document.getElementById("product-3").style.display="block";
+          }
+          if(click==3){
+            document.getElementById("product-4").style.display="block";
+          }
+          if(click==4){
+            document.getElementById("product-5").style.display="block";
+          }
+
+        }
+
+      </script>
 {% endblock %}
