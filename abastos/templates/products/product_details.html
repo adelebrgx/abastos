@@ -2,18 +2,23 @@
 
 {% block content %}
 {% load static from staticfiles %}
+      <button id="details" style="float:left; margin-left: 10%; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); font-family: 'Montserrat', sans-serif;font-size: 20px;background-color: green; color:white;">
+      <a style="text-decoration:none; color:white;" href="/products/products-list"><i class="fas fa-arrow-circle-left"></i> Back to products' list</a></button><br />
+
       <h1>Details of the product</h1>
 
-      <button id="details" style="font-family: 'Montserrat', sans-serif;font-size: 20px;background-color: green; color:white; margin-bottom: 5%;">
-      <a style="text-decoration:none; color:white;" href="/products/products-list"><i class="fas fa-arrow-circle-left"></i> Back to products' list</a></button>
+      <div id="actual_product" style="  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color: white; margin-left:20%; font-size: 23px; margin-right:20%; padding-top:10px; padding-bottom:10px; border:2px; margin-bottom: 3%;" >
+          <img style="height:30px;" src="{{product.url}}"/> {{product.name}}
+      </div>
+      <h2 style="margin-bottom:2%;"> Do you want to make changes ? </h2>
       <form action="{% url 'products:product_details' slug=product.name %}" method="post" enctype="multipart/form-data">
         <input type="hidden" name="length" value=8>
         {% csrf_token %}
-        <label>Name</label>
+        <label><b>Name</b></label>
         <input type="text" name="name"  value="{{product.name}}">
-        <label>Url</label>
-        <input type="text" name="url"  value="{{product.url}}">
-        <input type="submit" value="Modify" />
+        <label><b>URL</b></label>
+        <input type="text" name="url"  value="{{product.url}}"><br />
+        <input type="submit" style="margin-top: 3%; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color:orange; color:white;" value="Modify" />
         </form>
 
 

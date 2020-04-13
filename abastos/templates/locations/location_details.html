@@ -2,23 +2,28 @@
 
 {% block content %}
 {% load static from staticfiles %}
+      <button id="details" style="float:left; margin-left: 10%; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); font-family: 'Montserrat', sans-serif;font-size: 20px;background-color: green; color:white;">
+      <a style="text-decoration:none; color:white;" href="/locations/locations-list"><i class="fas fa-arrow-circle-left"></i> Back to locations' list</a></button><br />
+
+
       <h1>Details of the location</h1>
+      <div style="  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color: white; margin-left:20%; font-size: 23px; margin-right:20%; padding-top:10px; padding-bottom:10px; border:2px;">
+        <b style="color: #ff5f3b;" >Name:</b> {{location.name}} <br />
+        <b style="color: #ff5f3b;">North coordinate:</b> {{location.north_coordinate}} <br />
+        <b style="color: #ff5f3b;">East coordinate:</b> {{location.east_coordinate}} <br />
+      </div>
 
-      <button id="details" style="font-family: 'Montserrat', sans-serif;font-size: 20px;background-color: green; color:white; margin-bottom: 5%;">
-      <a style="text-decoration:none; color:white;" href="/locations/locations-list"><i class="fas fa-arrow-circle-left"></i> Back to locations' list</a></button>
-
-
-
+      <h2 style="margin-bottom:2%;"> Do you want to make changes ? </h2>
       <form action="{% url 'locations:location_details' slug=location.slug %}" method="post" enctype="multipart/form-data">
         <input type="hidden" name="length" value=8>
         {% csrf_token %}
-        <label>Name</label>
+        <label><b>Name</b></label>
         <input type="text" name="name"  value="{{location.name}}">
-        <label>North coordinate</label>
+        <label><b>North coordinate</b></label>
         <input type="number" step="0.01" name="north_coordinate"  value="{{location.north_coordinate}}">
-        <label>East coordinate</label>
-        <input type="number"  step="0.01" name="east_coordinate"  value="{{location.east_coordinate}}">
-        <input type="submit" value="Modify" />
+        <label><b>East coordinate</b></label>
+        <input type="number"  step="0.01" name="east_coordinate"  value="{{location.east_coordinate}}"><br />
+        <input type="submit"  style="margin-top: 3%; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color:orange; color:white;" value="Modify" />
         </form>
 
 

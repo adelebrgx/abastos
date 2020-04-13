@@ -2,10 +2,12 @@
 
 {% block content %}
 {% load static from staticfiles %}
+
+    <button id="details" style="float:left; margin-left: 10%; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); font-family: 'Montserrat', sans-serif;font-size: 20px;background-color: green; color:white;">
+    <a style="text-decoration:none; color:white;" href="/sell/sell-list"><i class="fas fa-arrow-circle-left"></i> Back to sells' list</a></button><br />
+
       <h1>Details of the sell</h1>
 
-      <button id="details" style=" box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); font-family: 'Montserrat', sans-serif;font-size: 20px;background-color: green; color:white; margin-bottom: 3%;">
-      <a style="text-decoration:none; color:white;" href="/sell/sell-list"><i class="fas fa-arrow-circle-left"></i> Back to sells' list</a></button>
 
       <div style="  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color: white; margin-left:20%; font-size: 23px; margin-right:20%; padding-top:10px; padding-bottom:10px; border:2px;">
         <b style="color: #ff5f3b;" >Product:</b> {{sellPair.product}} <br />
