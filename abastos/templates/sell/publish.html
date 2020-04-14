@@ -13,13 +13,13 @@
         <input type="hidden" name="length" value=8>
         {% csrf_token %}
         <label><b>Location</b></label>
-        <select style="font-size:20px; font-family: 'Montserrat', sans-serif;" id="cars" name="location">
+        <select style="margin-bottom:1%; font-size:20px; font-family: 'Montserrat', sans-serif;" id="cars" name="location">
           {% for location in locations %}
             <option  value="{{location.name}}">{{location.name}}</option>
           {% endfor %}
         </select>
-        <br /><br />
-        <div id="product-1">
+
+        <div id="product-1" style="margin-bottom:1%;">
           <label><b>Product</b></label>
           <select id="cars" style="font-size:20px; font-family: 'Montserrat', sans-serif;" name="product">
             {% for product in products %}
@@ -27,11 +27,11 @@
             {% endfor %}
           </select>
           <label><b>Quantity</b></label>
-          <input type="number" name="quantity">
+          <input type="number" value="1" name="quantity">
           <br />
-        </div><br />
+        </div>
 
-        <div id="product-2" style="display:none;">
+        <div id="product-2" style="display:none; margin-bottom:1%;">
           <label><b>Product</b></label>
           <select id="cars" style="font-size:20px; font-family: 'Montserrat', sans-serif;" name="product-1">
             {% for product in products %}
@@ -40,10 +40,11 @@
           </select>
           <label><b>Quantity</b></label>
           <input type="number" name="quantity-1">
+          <button type="button" id="undo-1" onclick="undo()" style="display: visible ;font-size: 25px; font-family: 'Montserrat', sans-serif; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color: orange; color:white; margin-top:1%;">Undo</button>
           <br />
-        </div><br />
+        </div>
 
-        <div id="product-3" style="display:none;">
+        <div id="product-3" style="display:none; margin-bottom:1%;">
           <label><b>Product</b></label>
           <select id="cars" style="font-size:20px; font-family: 'Montserrat', sans-serif;" name="product-2">
             {% for product in products %}
@@ -52,11 +53,12 @@
           </select>
           <label><b>Quantity</b></label>
           <input type="number" name="quantity-2">
+          <button type="button" id="undo-2" onclick="undo()" style="font-size: 25px; font-family: 'Montserrat', sans-serif; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color: orange; color:white; margin-top:1%;">Undo</button>
           <br />
-        </div><br />
+        </div>
 
 
-        <div id="product-4" style="display:none;">
+        <div id="product-4" style="display:none; margin-bottom:1%;">
           <label><b>Product</b></label>
           <select id="cars" style="font-size:20px; font-family: 'Montserrat', sans-serif;" name="product-3">
             {% for product in products %}
@@ -65,10 +67,11 @@
           </select>
           <label><b>Quantity</b></label>
           <input type="number" name="quantity-3">
+          <button type="button" id="undo-3" onclick="undo()" style="font-size: 25px; font-family: 'Montserrat', sans-serif; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color: orange; color:white; margin-top:1%;">Undo</button>
           <br />
-        </div><br />
+        </div>
 
-        <div id="product-5" style="display:none;">
+        <div id="product-5" style="display:none; margin-bottom:1%;">
           <label><b>Product</b></label>
           <select id="cars" style="font-size:20px; font-family: 'Montserrat', sans-serif;" name="product-4">
             {% for product in products %}
@@ -77,8 +80,9 @@
           </select>
           <label><b>Quantity</b></label>
           <input type="number" name="quantity-4">
+            <button type="button" id="undo-4" onclick="undo()" style="font-size: 25px; font-family: 'Montserrat', sans-serif; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color: orange; color:white; margin-top:1%;">Undo</button>
           <br />
-        </div><br />
+        </div>
 
         <input type="submit" style="font-size: 25px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color: lightblue; color:white; margin-top:3%;" value="Publish ad" />
       </form> <br />
@@ -97,15 +101,45 @@
           click+=1;
           if(click==1){
             document.getElementById("product-2").style.display="block";
+            document.getElementById("undo-1").style.display="visible";
           }
           if(click==2){
             document.getElementById("product-3").style.display="block";
+            document.getElementById("undo-1").style.display="none";
+            document.getElementById("undo-2").style.display="visible";
           }
           if(click==3){
             document.getElementById("product-4").style.display="block";
+            document.getElementById("undo-2").style.display="none";
+            document.getElementById("undo-3").style.display="visible";
           }
           if(click==4){
             document.getElementById("product-5").style.display="block";
+            document.getElementById("undo-3").style.display="none";
+            document.getElementById("undo-4").style.display="visible";
+          }
+
+        }
+
+        function undo(){
+          if(click==1){
+            document.getElementById("product-2").style.display="none";
+            click-=1;
+          }
+          if(click==2){
+            document.getElementById("undo-1").style.display="inline";
+            document.getElementById("product-3").style.display="none";
+            click-=1;
+          }
+          if(click==3){
+            document.getElementById("undo-2").style.display="inline";
+            document.getElementById("product-4").style.display="none";
+            click-=1;
+          }
+          if(click==4){
+            document.getElementById("undo-3").style.display="inline";
+            document.getElementById("product-5").style.display="none";
+            click-=1;
           }
 
         }
