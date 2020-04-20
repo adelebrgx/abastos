@@ -1,0 +1,31 @@
+{% extends 'base_layout.html'%}
+
+{% block content %}
+{% load static from staticfiles %}
+      <h1>New message</h1>
+
+
+      <form method="post" enctype="multipart/form-data">
+        <input type="hidden" name="length" value=8>
+        {% csrf_token %}
+
+        <label ><b>Who do you want to write to?:</b></label><br />
+        <select  style="font-size:18px; font-family:'Montserrat', sans-serif ; margin-top:1%; margin-bottom:1%;" name="recipient" >
+          {% for user in users %}
+            {% if user.username != myuser.username %}
+            <option value="{{user.username}}">{{user.username}}</option>
+            {% endif %}
+          {% endfor %}
+
+        </select><br />
+        <label ><b>Subject:</b> </label><br />
+        <input name="head" style="margin-top:1%;margin-bottom:1%;" type="text" size="50" /><br />
+        <label><b>Content:</b> </label><br />
+        <textarea name="content"style=" font-family:'Montserrat', sans-serif ;margin-top:1%;margin-bottom:1%;width:40%; height:150px; border:none;" name="textarea"></textarea><br />
+
+        <input style="font-size: 25px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color:lightblue; color:white;" type="submit" value="Send" />
+      </form>
+
+
+
+{% endblock %}

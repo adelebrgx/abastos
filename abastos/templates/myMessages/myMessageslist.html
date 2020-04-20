@@ -2,6 +2,38 @@
 
 {% block content %}
 {% load static from staticfiles %}
-      <h1>List of messages</h1>
+      <h1>Messages</h1>
 
+      <button style="color: white; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); margin-bottom:5%; background-color:#ff5f3b; border:0; font-family:'Montserrat', sans-serif; font-size: 25px;"><i style="color:white;" class="far fa-envelope"></i><a  style="color:white; text-decoration:inherit;" href="/myMessages/new-message" >
+      New message </a></button>
+      {% for message in messages %}
+        {% if message.recipient == user %}
+
+          <div id="message" onmouseout="mouseout2()" onmouseover="mouseover2()" style="margin-left:20%; margin-right:20%; padding-top:10px; padding-bottom:10px; border:2px; background-color:white;box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);">
+            <a><h2 style="color: #ff5f3b;">{{message.head}}</h2>
+            <h5><em>{{message.date}}</em></h5>
+            <h5><b>From: </b>{{message.author}}</h5>
+            <h3 style="margin-top:5%;">{{message.content}}</h3></a>
+
+
+          </div>
+
+
+        {% endif %}
+
+      {% endfor %}
+
+
+<script>
+
+function mouseover2() {
+    document.getElementById("message").style.backgroundColor ="#fff2e8";
+
+}
+function mouseout2() {
+    document.getElementById("message").style.backgroundColor ="white";
+
+}
+
+</script>
 {% endblock %}
