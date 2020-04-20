@@ -11,6 +11,7 @@ class myMessage(models.Model):
     author=models.ForeignKey(User, related_name="from+")
     recipient=models.ForeignKey(User, related_name="to+")
     date=models.DateTimeField(auto_now_add=True)
+    slug=models.CharField(max_length=50,default="my-slug")
 
 
     def __str__(self):
