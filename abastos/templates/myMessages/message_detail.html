@@ -1,0 +1,50 @@
+{% extends 'base_layout.html'%}
+
+{% block content %}
+{% load static from staticfiles %}
+      <button id="details" style="float:left; margin-left: 10%; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); font-family: 'Montserrat', sans-serif;font-size: 20px;background-color: green; color:white;">
+      <a style="text-decoration:none; color:white;" href="/myMessages/messages-list"><i class="fas fa-arrow-circle-left"></i> Back to messages' list</a></button><br />
+
+      <h1>Details of the message</h1>
+
+      <div id="actual_message" style=" box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color: white; margin-left:20%; margin-right:20%;  border:2px; margin-bottom: 3%;" >
+          <p style="display:inline-block; font-size:30px;"><b>{{message.author}}</b></p><p style="display:inline-block; padding-left: 55%;">{{message.date}}</p><br />
+
+          <span style="display:inline-block; padding-right: 78%; font-size: 19px;"><b>{{message.head}}</b></span>
+          <hr style="margin-left:10px; margin-right: 10px; margin-top: 2%;">
+
+          <p style="display:inline-block; padding-right: 81%; font-size:14px; padding-bottom: 2%;">
+            {{message.content}}
+          </p>
+      </div>
+      <div id="form" style="display:none;">
+        <form>
+          <textarea name="content"style=" box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);font-family:'Montserrat', sans-serif ;margin-top:1%;margin-bottom:1%;width:60%; height:70px; border:none;" name="textarea"></textarea><br />
+
+          <input style="margin-left: 50%; display: inline-block;font-size: 25px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color:lightblue; color:white;" type="submit" value="Send" />
+          <button id="cancel" onclick="cancel()" style="font-size: 25px; margin-top: 3%; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color:red; font-family: 'Montserrat', sans-serif;color:white;">Cancel</button>
+
+        </form>
+      </div>
+
+
+      <button id="send" onclick="send()" style="font-size: 25px; margin-top: 3%; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color:lightblue; font-family: 'Montserrat', sans-serif;color:white;">Answer</button>
+<script>
+
+function send(){
+document.getElementById("send").style.display="none";
+document.getElementById("form").style.display="block";
+
+}
+
+function cancel(){
+  document.getElementById("send").style.display="block";
+  document.getElementById("form").style.display="none";
+}
+
+
+
+
+
+</script>
+{% endblock %}

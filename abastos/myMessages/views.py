@@ -13,7 +13,8 @@ def messages_list_view(request):
     return render(request,"myMessages/myMessageslist.html", {'messages':messages,'user':user})
 
 def message_details_view(request,slug):
-    return HttpResponse(slug)
+    message=myMessage.objects.get(slug=slug)
+    return render(request, "myMessages/message_detail.html", {'message':message})
 
 
 

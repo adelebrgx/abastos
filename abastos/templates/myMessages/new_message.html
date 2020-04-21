@@ -2,9 +2,10 @@
 
 {% block content %}
 {% load static from staticfiles %}
+      <button id="details" style="float:left; margin-left: 10%; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); font-family: 'Montserrat', sans-serif;font-size: 20px;background-color: green; color:white;">
+      <a style="text-decoration:none; color:white;" href="/myMessages/messages-list"><i class="fas fa-arrow-circle-left"></i> Back to messages' list</a></button><br />
+
       <h1>New message</h1>
-
-
       <form method="post" enctype="multipart/form-data">
         <input type="hidden" name="length" value=8>
         {% csrf_token %}
@@ -19,9 +20,9 @@
 
         </select><br />
         <label ><b>Subject:</b> </label><br />
-        <input name="head" style="margin-top:1%;margin-bottom:1%;" type="text" size="50" /><br />
+        <input name="head" style="margin-top:1%;margin-bottom:1%;width:40%;" type="text"  /><br />
         <label><b>Content:</b> </label><br />
-        <textarea name="content"style=" font-family:'Montserrat', sans-serif ;margin-top:1%;margin-bottom:1%;width:40%; height:150px; border:none;" name="textarea"></textarea><br />
+        <textarea name="content"style=" font-family:'Montserrat', sans-serif ;margin-top:1%;margin-bottom:1%;width:40%; height:100px; border:none;" name="textarea"></textarea><br />
 
         <input style="font-size: 25px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color:lightblue; color:white;" type="submit" value="Send" />
       </form>
