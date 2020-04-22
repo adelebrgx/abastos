@@ -7,10 +7,17 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 
 
-def messages_list_view(request):
-    messages=myMessage.objects.all().order_by('date')
+def messages_list_received_view(request):
     user=request.user
-    return render(request,"myMessages/myMessageslist.html", {'messages':messages,'user':user})
+    messages=myMessage.objects.filter(recipient=user)
+    return render(request,"myMessages/myMessageslist_received.html", {'messages':messages,'user':user})
+
+def messages_list_sent_view(request):
+    user=request.user
+    print(user)
+    messages=myMessage.objects.filter(author=user)
+    print(messages)
+    return render(request,"myMessages/myMessageslist_sent.html", {'user':user,'messages':messages})
 
 def message_details_view(request,slug):
     message=myMessage.objects.get(slug=slug)
