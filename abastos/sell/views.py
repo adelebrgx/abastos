@@ -10,25 +10,29 @@ from locations.models import Location
 from .import forms
 
 def sell_list_view(request):
+    type="product"
     sellPairs=SellPair.objects.all().order_by('product')
     sells=Sell.objects.all().order_by('author')
-    return render(request,'sell/selllist.html', {'sells':sells, 'sellpairs': sellPairs, 'user':request.user})
+    return render(request,'sell/selllist.html', {'sells':sells, 'sellpairs': sellPairs, 'user':request.user, 'type':type})
 
 def sell_list_by_date(request):
+    type="date"
     sellPairs=SellPair.objects.all().order_by('sell__date')
     sells=Sell.objects.all().order_by('date')
-    return render(request,'sell/selllist.html', {'sells':sells, 'sellpairs': sellPairs, 'user':request.user})
+    return render(request,'sell/selllist.html', {'sells':sells, 'sellpairs': sellPairs, 'user':request.user, 'type':type})
 
 def sell_list_by_location(request):
+    type="location"
     sellPairs=SellPair.objects.all().order_by('sell__location')
     sells=Sell.objects.all().order_by('date')
-    return render(request,'sell/selllist.html', {'sells':sells, 'sellpairs': sellPairs, 'user':request.user})
+    return render(request,'sell/selllist.html', {'sells':sells, 'sellpairs': sellPairs, 'user':request.user, 'type':type})
 
 
 def sell_list_by_author(request):
+    type="author"
     sellPairs=SellPair.objects.all().order_by('sell__author')
     sells=Sell.objects.all().order_by('date')
-    return render(request,'sell/selllist.html', {'sells':sells, 'sellpairs': sellPairs, 'user':request.user})
+    return render(request,'sell/selllist.html', {'sells':sells, 'sellpairs': sellPairs, 'user':request.user, 'type':type})
 
 
 @login_required(login_url="/accounts/login/")
