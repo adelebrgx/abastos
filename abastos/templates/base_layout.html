@@ -27,7 +27,7 @@
 
 
           {% if user.is_authenticated %}
-          <li style="margin-top: 24px;float:right; overflow: hidden;">
+          <li style="margin-top: 24px; margin-right:2%; float:right; overflow: hidden;">
             <div id="user" onmouseover="mouseover()" onmouseout="mouseout()" style="color:white;">
               <i class="fas fa-user"></i> <span id="hey" style="padding-right:20px;">{{user.username}}</span>
               <div style="height:20px;">
@@ -35,7 +35,7 @@
               </div>
 
             </div>
-            <div id="dropdown-content" onmouseover="mouseover()" onmouseout="mouseout()" style="font-size: 13px; margin-right:10px; color:black; width:160px;  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); position: absolute; display:none; background-color:white;  ">
+            <div id="dropdown-content" onmouseover="mouseover()" onmouseout="mouseout()" style="font-size: 12px;  color:black; width:160px;  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); position: absolute; float:right; display:none; background-color:white;  ">
               <a id="item"  style="color:darkgrey;  float: none; display: block;" href="#"><i style="color:darkgrey" class="fas fa-user-cog"></i> My account</a>
               <a id="item"  style="color:darkgrey; float: none; display: block;" href="/myMessages/messages-list/received"><b><i style="color:darkgrey" class="fas fa-inbox"></i> My messages </b></a>
               <form class="logout" action="/accounts/logout/" method="post">

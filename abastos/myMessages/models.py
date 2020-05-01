@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 
 class myMessage(models.Model):
     id = models.AutoField(primary_key=True)
+    conv_id=models.IntegerField(null=True)
     head=models.CharField(max_length=50)
     content=models.CharField(max_length=1000,default="This message is empty")
     author=models.ForeignKey(User, related_name="from+")

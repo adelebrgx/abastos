@@ -21,6 +21,7 @@ def messages_list_sent_view(request):
 
 def message_details_view(request,slug):
     message=myMessage.objects.get(slug=slug)
+
     return render(request, "myMessages/message_detail.html", {'message':message})
 
 
@@ -28,13 +29,15 @@ def message_details_view(request,slug):
 def new_message_view(request):
     myuser=request.user
     users=User.objects.all()
-    messages=myMessage.objects.all().order_by('date')
+    messages=myMessage.objects.filter(recipient=myuser)
     if request.method=="POST":
         myHead=request.POST['head']
+        myHeadSlug="-".join( myHead.split() )
+        print(myHead)
         myContent=request.POST['content']
         myAuthor=request.user
         myRecipient=User.objects.get(username=request.POST['recipient'])
-        mySlug=str(myHead)+"-"+str(myAuthor)+"-"+str(myRecipient)
+        mySlug=str(myHeadSlug)+"-"+str(myAuthor)+"-"+str(myRecipient)
         print(myHead)
         print(myContent)
         print(myAuthor)
@@ -42,7 +45,8 @@ def new_message_view(request):
         print(mySlug)
         message=myMessage.objects.create(head=myHead, content=myContent, author=myAuthor, recipient=myRecipient, slug=mySlug)
         message.save()
-        return render(request, "myMessages/myMessageslist.html", {'messages':messages, 'user':myuser})
+        type="received"
+        return render(request, "myMessages/myMessageslist.html", {'messages':messages, 'user':myuser, 'type':type})
 
 
     return render(request, "myMessages/new_message.html", {'messages':messages, 'myuser':myuser, 'users':users})
