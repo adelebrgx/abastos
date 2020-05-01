@@ -9,15 +9,15 @@ from django.http import HttpResponse
 
 def messages_list_received_view(request):
     user=request.user
+    type="received"
     messages=myMessage.objects.filter(recipient=user)
-    return render(request,"myMessages/myMessageslist_received.html", {'messages':messages,'user':user})
+    return render(request,"myMessages/myMessageslist.html", {'messages':messages,'user':user,'type':type})
 
 def messages_list_sent_view(request):
     user=request.user
-    print(user)
+    type="sent"
     messages=myMessage.objects.filter(author=user)
-    print(messages)
-    return render(request,"myMessages/myMessageslist_sent.html", {'user':user,'messages':messages})
+    return render(request,"myMessages/myMessageslist.html", {'user':user,'messages':messages,'type':type})
 
 def message_details_view(request,slug):
     message=myMessage.objects.get(slug=slug)

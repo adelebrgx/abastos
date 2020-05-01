@@ -7,7 +7,8 @@
 
       <button style="color: white; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); margin-bottom:5%; background-color:#ff5f3b; border:0; font-family:'Montserrat', sans-serif; font-size: 25px;"><i style="color:white;" class="far fa-envelope"></i><a  style="color:white; text-decoration:inherit;" href="/myMessages/new-message" >
       New message </a></button><br />
-      <select onchange="received();" id="choice" style="margin-bottom: 3%;box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);font-family:'Montserrat', sans-serif;font-size: 25px;">
+      {% if type == "sent" %}
+      <select onchange="sent();" id="choice" style="margin-bottom: 3%;box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);font-family:'Montserrat', sans-serif;font-size: 25px;">
         <option id="sent" value="1">
           Sent
         </option>
@@ -16,13 +17,24 @@
         </option>
       </select>
 
+      {% else %}
+      <select onchange="received();" id="choice" style="margin-bottom: 3%;box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);font-family:'Montserrat', sans-serif;font-size: 25px;">
+        <option id="received" value="1">
+          Received
+        </option>
+        <option id="sent" value="2">
+          Sent
+        </option>
+      </select>
+      {% endif %}
+
       {% for message in messages %}
 
 
           <div id="message" onclick="Click('{{message.slug}}');" onmouseout="mouseout2()" onmouseover="mouseover2()" style="margin-left:20%; margin-right:20%; padding-top:10px; padding-bottom:10px; border:2px; background-color:white;box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);">
             <h2 style="color: #ff5f3b;">{{message.head}}</h2>
               <h5><em>{{message.date}}</em></h5>
-              <h5><b>From: </b>{{message.author}}</h5>
+              <h5><b>From: {{message.author}}</b></h5>
 
 
 
@@ -53,6 +65,19 @@ function Click(slug){
 }
 
 function received(){
+  text=document.getElementById("choice").value;
+  if (text==2){
+    window.location.href="/myMessages/messages-list/sent/";
+  }
+  else{
+    window.location.href="/myMessages/messages-list/received/";
+
+  }
+
+
+}
+
+function sent(){
   text=document.getElementById("choice").value;
   if (text==2){
     window.location.href="/myMessages/messages-list/received/";
