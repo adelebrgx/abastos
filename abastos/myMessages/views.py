@@ -20,9 +20,34 @@ def messages_list_sent_view(request):
     return render(request,"myMessages/myMessageslist.html", {'user':user,'messages':messages,'type':type})
 
 def message_details_view(request,slug):
-    message=myMessage.objects.get(slug=slug)
+    if request.method=="POST":
+        messages=myMessage.objects.all()
+        myuser=request.user
+        type="received"
+        myContent=request.POST.get('content')
+        myHead=request.POST.get('head')
+        myId=request.POST.get('conv_id')
+        recipient=request.POST.get('original_author')
+        mySlug="none"
+        print(mySlug)
+        myAuthor=request.user
+        print(myAuthor)
+        print(myContent)
+        print(myHead)
+        print(myId)
+        myRecipient=User.objects.get(username=recipient)
+        print(myRecipient)
+        message=myMessage.objects.create(conv_id=myId, head=myHead, content=myContent, author=myAuthor, recipient=myRecipient, slug=mySlug)
+        message.slug=str(myHead)+"-"+str(myAuthor)+"-"+str(myRecipient)+"-"+str(message.id)
+        message.save()
+        mymessages=myMessage.objects.filter(recipient=myuser)
+        return render(request, "myMessages/myMessageslist.html", {'messages':mymessages, 'user':myuser, 'type':type})
 
-    return render(request, "myMessages/message_detail.html", {'message':message})
+    message=myMessage.objects.get(slug=slug)
+    conv_id=message.conv_id
+    messages=myMessage.objects.filter(conv_id=conv_id)
+    print(messages)
+    return render(request, "myMessages/message_detail.html", {'message':message, 'messages':messages})
 
 
 
@@ -37,16 +62,19 @@ def new_message_view(request):
         myContent=request.POST['content']
         myAuthor=request.user
         myRecipient=User.objects.get(username=request.POST['recipient'])
-        mySlug=str(myHeadSlug)+"-"+str(myAuthor)+"-"+str(myRecipient)
+        mySlug="none"
         print(myHead)
         print(myContent)
         print(myAuthor)
         print(myRecipient)
         print(mySlug)
         message=myMessage.objects.create(head=myHead, content=myContent, author=myAuthor, recipient=myRecipient, slug=mySlug)
+        message.conv_id=message.id
+        mySlug=str(myHeadSlug)+"-"+str(myAuthor)+"-"+str(myRecipient)+"-"+str(message.id)
         message.save()
         type="received"
-        return render(request, "myMessages/myMessageslist.html", {'messages':messages, 'user':myuser, 'type':type})
+        mymessages=myMessage.objects.filter(recipient=myuser)
+        return render(request, "myMessages/myMessageslist.html", {'messages':mymessages, 'user':myuser, 'type':type})
 
 
     return render(request, "myMessages/new_message.html", {'messages':messages, 'myuser':myuser, 'users':users})

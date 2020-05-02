@@ -7,31 +7,58 @@
 
       <h1>Details of the message</h1>
 
-      <div id="actual_message" style=" box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color: white; margin-left:20%; margin-right:20%;  border:2px; margin-bottom: 3%;" >
-          <p style="display:inline-block; font-size:30px;"><b>{{message.author}}</b></p><p style="display:inline-block; padding-left: 55%;">{{message.date}}</p><br />
+      <div id="actual_message" style=" box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color: white; margin-left:20%; margin-right:20%;  border:2px; margin-bottom: 1%;" >
+          <p style=" color: #ff5f3b; padding-top: 2%;text-align:left; font-size:30px; padding-left: 2%"><b>{{message.author}}</b></p>
+          <p style=" text-align:left; padding-left: 2%; font-size: 10px;">{{message.date}}</p><br />
 
-          <span style="display:inline-block; padding-right: 78%; font-size: 19px;"><b>{{message.head}}</b></span>
+          <p style="text-align:left; padding-left: 2%; font-size: 19px;"><b>Subject:</b> {{message.head}}</p>
           <hr style="margin-left:10px; margin-right: 10px; margin-top: 2%;">
 
-          <p style="display:inline-block; padding-right: 81%; font-size:14px; padding-bottom: 2%;">
+          <p style="text-align:left; padding-left: 2%; font-size:14px; padding-top: 2%; padding-bottom: 2%;">
             {{message.content}}
           </p>
       </div>
+
+      {% for mess in messages %}
+      {% if mess.id != message.id %}
+      <div id="actual_message" style=" box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color: white; margin-left:20%; margin-right:20%;  border:2px; margin-bottom: 1%;" >
+          <p style=" color: #ff5f3b; padding-top: 2%;text-align:left; font-size:30px; padding-left: 2%"><b>{{mess.author}}</b></p>
+          <p style=" text-align:left; padding-left: 2%; font-size: 10px;">{{mess.date}}</p><br />
+
+          <p style="text-align:left; padding-left: 2%; font-size: 19px;"><b>Subject:</b> Re: {{mess.head}}</p>
+          <hr style="margin-left:10px; margin-right: 10px; margin-top: 2%;">
+
+          <p style="text-align:left; padding-left: 2%; font-size:14px; padding-top: 2%; padding-bottom: 2%;">
+            {{mess.content}}
+          </p>
+      </div>
+      {% endif %}
+      {% endfor %}
+
+
+
       <div id="form" style="display:none;">
-        <form>
-          <textarea name="content"style=" box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);font-family:'Montserrat', sans-serif ;margin-top:1%;margin-bottom:1%;width:60%; height:70px; border:none;" name="textarea"></textarea><br />
+        <form method="post" enctype="multipart/form-data">
+          <input type="hidden" name="length" value=8>
+          {% csrf_token %}
+          <textarea name="content" style=" box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);font-family:'Montserrat', sans-serif ;margin-top:1%;margin-bottom:1%;width:60%; height:70px; border:none;" name="textarea"></textarea><br />
+
+          <input id="thisone" type="hidden" name= "head"  value='hello' >
+          <input name= "conv_id" type="hidden" value={{message.conv_id}}>
+          <input name= "original_author" type="hidden" value={{message.author}}>
 
           <input style="margin-left: 50%; display: inline-block;font-size: 25px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color:lightblue; color:white;" type="submit" value="Send" />
-          <button id="cancel" onclick="cancel()" style="margin-right:2%;font-size: 25px; margin-top: 3%; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color:red; font-family: 'Montserrat', sans-serif;color:white;">Cancel</button>
+          <button  id="cancel" onclick="cancel()" style="margin-right:2%;font-size: 25px; margin-top: 3%; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color:red; font-family: 'Montserrat', sans-serif;color:white;">Cancel</button>
 
         </form>
       </div>
 
 
-      <button id="send" onclick="send()" style="font-size: 25px; margin-top: 3%; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color:lightblue; font-family: 'Montserrat', sans-serif;color:white;">Answer</button>
+      <button id="send" onclick="send('{{message.head}}')" style="font-size: 25px; margin-top: 3%; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color:lightblue; font-family: 'Montserrat', sans-serif;color:white;">Answer</button>
 <script>
 
-function send(){
+function send(val){
+  document.getElementById("thisone").value=slugify(val);
 document.getElementById("send").style.display="none";
 document.getElementById("form").style.display="block";
 
@@ -40,6 +67,10 @@ document.getElementById("form").style.display="block";
 function cancel(){
   document.getElementById("send").style.display="block";
   document.getElementById("form").style.display="none";
+}
+
+function slugify(val){
+  return val.replace(/ /g, "-");
 }
 
 
