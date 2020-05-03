@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login,  authenticate, logout
+from django.contrib.auth.models import User
 
 # Create your views here.
 def signup_view(request):
@@ -46,3 +47,23 @@ def logout_view(request):
     if request.method=="POST":
         logout(request)
         return redirect('/homepage')
+
+def infos_view(request):
+    user=request.user
+    if request.method=="POST":
+        myUsername=request.POST.get('username')
+        myName=request.POST.get('firstname')
+        myLastName=request.POST.get('lastname')
+        myPassword=request.POST.get('password')
+        user=User.objects.get(username=user.username)
+        if (str(myPassword)==""):
+            print("password wasn't changed")
+        else:
+            user.set_password(myPassword)
+            print(myPassword)
+        user.last_name=myLastName
+        user.first_name=myName
+        user.username=myUsername
+        user.save()
+        return redirect('/homepage')
+    return render(request, "accounts/infos.html", {'user':user})

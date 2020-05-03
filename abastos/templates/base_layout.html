@@ -36,7 +36,7 @@
 
             </div>
             <div id="dropdown-content" onmouseover="mouseover()" onmouseout="mouseout()" style="font-size: 12px;  color:black; width:160px;  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); position: absolute; float:right; display:none; background-color:white;  ">
-              <a id="item"  style="color:darkgrey;  float: none; display: block;" href="#"><i style="color:darkgrey" class="fas fa-user-cog"></i> My account</a>
+              <a id="item"  style="color:darkgrey;  float: none; display: block;" href="/accounts/informations"><i style="color:darkgrey" class="fas fa-user-cog"></i> My account</a>
               <a id="item"  style="color:darkgrey; float: none; display: block;" href="/myMessages/messages-list/received"><b><i style="color:darkgrey" class="fas fa-inbox"></i> My messages </b></a>
               <form class="logout" action="/accounts/logout/" method="post">
                 {% csrf_token %}
