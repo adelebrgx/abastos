@@ -17,6 +17,14 @@
         </option>
       </select>
 
+      {% for message in messages %}
+          <div id="{{message.id}}" onclick="Click('{{message.slug}}');" onmouseout="mouseout2({{message.id}})" onmouseover="mouseover2({{message.id}})" style="margin-bottom:2%; margin-left:20%; margin-right:20%; padding-top:10px; padding-bottom:10px; border:2px; background-color:white;box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);">
+            <h2 style="color: #ff5f3b;">{{message.head}}</h2>
+              <h6><em>{{message.date}}</em></h6>
+              <h3><b>To: {{message.recipient}}</b></h3>
+          </div>
+      {% endfor %}
+
       {% else %}
       <select onchange="received();" id="choice" style="margin-bottom: 3%;box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);font-family:'Montserrat', sans-serif;font-size: 25px;">
         <option id="received" value="1">
@@ -26,26 +34,17 @@
           Sent
         </option>
       </select>
-      {% endif %}
 
       {% for message in messages %}
-
-
           <div id="{{message.id}}" onclick="Click('{{message.slug}}');" onmouseout="mouseout2({{message.id}})" onmouseover="mouseover2({{message.id}})" style="margin-bottom:2%; margin-left:20%; margin-right:20%; padding-top:10px; padding-bottom:10px; border:2px; background-color:white;box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);">
             <h2 style="color: #ff5f3b;">{{message.head}}</h2>
-              <h5><em>{{message.date}}</em></h5>
-              <h5><b>From: {{message.author}}</b></h5>
-
-
-
-
-
+              <h6><em>{{message.date}}</em></h6>
+              <h3><b>From: {{message.author}}</b></h3>
           </div>
-
-
-
-
       {% endfor %}
+      {% endif %}
+
+
 
 
 <script>

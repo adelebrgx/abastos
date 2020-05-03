@@ -25,7 +25,9 @@ def message_details_view(request,slug):
         myuser=request.user
         type="received"
         myContent=request.POST.get('content')
-        myHead=request.POST.get('head')
+        Head=request.POST.get('head')
+        myHead=" ".join(Head.split("-"))
+        myHead="Re:"+myHead
         myId=request.POST.get('conv_id')
         recipient=request.POST.get('original_author')
         mySlug="none"
@@ -38,7 +40,7 @@ def message_details_view(request,slug):
         myRecipient=User.objects.get(username=recipient)
         print(myRecipient)
         message=myMessage.objects.create(conv_id=myId, head=myHead, content=myContent, author=myAuthor, recipient=myRecipient, slug=mySlug)
-        message.slug=str(myHead)+"-"+str(myAuthor)+"-"+str(myRecipient)+"-"+str(message.id)
+        message.slug=str(Head)+"-"+str(myAuthor)+"-"+str(myRecipient)+"-"+str(message.id)
         message.save()
         mymessages=myMessage.objects.filter(recipient=myuser)
         return render(request, "myMessages/myMessageslist.html", {'messages':mymessages, 'user':myuser, 'type':type})
