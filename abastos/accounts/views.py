@@ -50,20 +50,37 @@ def logout_view(request):
 
 def infos_view(request):
     user=request.user
+    identicals=True
+    password=True
+
     if request.method=="POST":
-        myUsername=request.POST.get('username')
         myName=request.POST.get('firstname')
         myLastName=request.POST.get('lastname')
-        myPassword=request.POST.get('password')
+        new1=request.POST.get('new1')
+        new2=request.POST.get('new2')
+        myEmailAdress=request.POST.get('email')
+
         user=User.objects.get(username=user.username)
-        if (str(myPassword)==""):
+
+        #print(new1)
+        #print(new2)
+        if (str(new1)=="" or str(new2)==""):
             print("password wasn't changed")
+            password=False
+
+            render(request, "accounts/infos.html", {'user':user, 'identicals':identicals, 'password':password})
+        elif(str(new1)!=str(new2)):
+            print("password aren't identicals")
+            identicals=False
+
+            return render(request, "accounts/infos.html", {'user':user, 'identicals':identicals,'password':password})
         else:
-            user.set_password(myPassword)
-            print(myPassword)
-        user.last_name=myLastName
-        user.first_name=myName
-        user.username=myUsername
-        user.save()
-        return redirect('/homepage')
-    return render(request, "accounts/infos.html", {'user':user})
+            user.set_password(new2)
+            print("password was changed to")
+            print(new2)
+            user.last_name=myLastName
+            user.first_name=myName
+            user.email=myEmailAdress
+            user.save()
+            return redirect('/homepage')
+    return render(request, "accounts/infos.html", {'user':user, 'identicals':identicals, 'password':password})

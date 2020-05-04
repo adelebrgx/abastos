@@ -2,8 +2,14 @@
 
 {% block content %}
 
-      <h1>Hello {{user.username}}</h1>
+      <h1>Hello {{user.username}} !</h1>
       <h3>You can modify your infos here</h3>
+      {% if identicals == False %}
+      <h5 style="color:red;">Password aren't identicals</h5>
+      {% endif %}
+      {% if password == False %}
+      <h5 style="color:red;">The password format isn't correct</h5>
+      {% endif %}
 
       <form  method="post" enctype="multipart/form-data">
         <input type="hidden" name="length" value=8>
@@ -12,10 +18,13 @@
         <input style="margin-bottom:2%;" type="text" name="firstname"  value="{{user.first_name}}"><br>
         <label><b>Surname:</b></label>
         <input style="margin-bottom:2%;" type="text" name="lastname"  value="{{user.last_name}}"><br>
-        <label ><b>Username:</b></label>
-        <input style="margin-bottom:2%;" type="text" name="username"  value="{{user.username}}"><br>
-        <label ><b>Change password:</b></label>
-        <input style="margin-bottom:2%;" type="text" name="password" ><br>
+        <label><b>Email adress:</b></label>
+        <input style="width: 25%; margin-bottom:2%;" type="text" name="email"  value="{{user.email}}"><br>
+        <label><em>Do you wish to change your password?</em></label><br>
+        <label ><b>Enter new password:</b></label>
+        <input style="margin-bottom:5px; margin-top: 1%;" type="password" name="new1" ><br>
+        <label ><b>Enter new password again:</b></label>
+        <input style="margin-bottom:5px; margin-top: 1%;" type="password" name="new2" ><br>
         <input type="submit" style="font-size: 25px;  margin-top: 3%; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color:orange; color:white;" value="Modify" />
       </form>
 
