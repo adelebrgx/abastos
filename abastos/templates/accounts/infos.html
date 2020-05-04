@@ -10,6 +10,15 @@
       {% if password == False %}
       <h5 style="color:red;">The password format isn't correct</h5>
       {% endif %}
+      {% if email == False %}
+      <h5 style="color:red;">The email format isn't correct</h5>
+      {% endif %}
+      {% if name == False %}
+      <h5 style="color:red;">The name format isn't correct</h5>
+      {% endif %}
+      {% if lastname == False %}
+      <h5 style="color:red;">The lastname format isn't correct</h5>
+      {% endif %}
 
       <form  method="post" enctype="multipart/form-data">
         <input type="hidden" name="length" value=8>

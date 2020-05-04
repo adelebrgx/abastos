@@ -8,6 +8,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login,  authenticate, logout
 from django.contrib.auth.models import User
 
+import re
+
 # Create your views here.
 def signup_view(request):
     if request.method=='POST':
@@ -48,9 +50,20 @@ def logout_view(request):
         logout(request)
         return redirect('/homepage')
 
+def num_there(s):
+    regex = re.compile('[@_!#$%^&*()<>?/\|}{~:1234567890]')
+    if(regex.search(s) == None):
+        return False
+    return True
+
+
 def infos_view(request):
     user=request.user
     identicals=True
+    email=True
+    lastname=True
+    name=True
+    regex = '^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'
 
 
     if request.method=="POST":
@@ -59,31 +72,65 @@ def infos_view(request):
         new1=request.POST.get('new1')
         new2=request.POST.get('new2')
         myEmailAdress=request.POST.get('email')
-
         user=User.objects.get(username=user.username)
 
-        print(new1)
-        print(new2)
-
+        #wishes to reset password
         if(str(new1)==str(new2) and str(new1)!=""):
+            if(re.search(regex,myEmailAdress)):
+                if(num_there(myLastName)==True):
+                    print("lastname ok")
+                user.last_name=myLastName
+                user.first_name=myName
+                user.email=myEmailAdress
+                user.set_password(new2)
+                user.save()
+                return redirect('/homepage')
+            else:
+                email=False
+                return render(request, "accounts/infos.html", {'user':user, 'identicals':identicals,'email':email, 'name':name,'lastname':lastname})
 
-            user.set_password(new2)
-            print("password was changed to")
-            print(new2)
-            user.last_name=myLastName
-            user.first_name=myName
-            user.email=myEmailAdress
-            user.save()
-            return redirect('/homepage')
+        #doesn't wish to reset password correct
         elif(str(new1)=="" and str(new2)==""):
-            user.last_name=myLastName
-            user.first_name=myName
-            user.email=myEmailAdress
-            user.save()
-            return redirect('/homepage')
+
+            print(num_there(myLastName))
+            print(num_there(myName))
+
+            if(re.search(regex,myEmailAdress)):
+                #if(num_there(myLastName)==False):
+                if(num_there(myLastName)==False):
+                    if(num_there(myName)==False):
+                        user.email=myEmailAdress
+                        user.last_name=myLastName
+                        user.first_name=myName
+                        user.save()
+                        return redirect('/homepage')
+                    name=False
+                    return render(request, "accounts/infos.html", {'user':user, 'identicals':identicals,'email':email, 'name':name,'lastname':lastname})
+                lastname=False
+                if(num_there(myName)==True):
+                    name=False
+                return render(request, "accounts/infos.html", {'user':user, 'identicals':identicals,'email':email, 'name':name,'lastname':lastname})
+
+
+
+            else:
+                print("not valid email adress")
+                email=False
+                if(num_there(myName)==True):
+                    name=False
+                if(num_there(myLastName)==True):
+                    lastname=False
+                return render(request, "accounts/infos.html", {'user':user, 'identicals':identicals,'email':email, 'name':name,'lastname':lastname})
+
+
+
+        #wishes to reset password incorrect
         else:
+            if(str(re.search(regex,myEmailAdress))=="None"):
+                email=False
+
             print("password aren't identicals")
             identicals=False
 
-            return render(request, "accounts/infos.html", {'user':user, 'identicals':identicals})
-    return render(request, "accounts/infos.html", {'user':user, 'identicals':identicals})
+            return render(request, "accounts/infos.html", {'user':user, 'identicals':identicals,'email':email})
+    return render(request, "accounts/infos.html", {'user':user, 'identicals':identicals,'email':email})
