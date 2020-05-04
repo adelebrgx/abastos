@@ -51,7 +51,7 @@ def logout_view(request):
 def infos_view(request):
     user=request.user
     identicals=True
-    password=True
+
 
     if request.method=="POST":
         myName=request.POST.get('firstname')
@@ -62,19 +62,11 @@ def infos_view(request):
 
         user=User.objects.get(username=user.username)
 
-        #print(new1)
-        #print(new2)
-        if (str(new1)=="" or str(new2)==""):
-            print("password wasn't changed")
-            password=False
+        print(new1)
+        print(new2)
 
-            render(request, "accounts/infos.html", {'user':user, 'identicals':identicals, 'password':password})
-        elif(str(new1)!=str(new2)):
-            print("password aren't identicals")
-            identicals=False
+        if(str(new1)==str(new2) and str(new1)!=""):
 
-            return render(request, "accounts/infos.html", {'user':user, 'identicals':identicals,'password':password})
-        else:
             user.set_password(new2)
             print("password was changed to")
             print(new2)
@@ -83,4 +75,15 @@ def infos_view(request):
             user.email=myEmailAdress
             user.save()
             return redirect('/homepage')
-    return render(request, "accounts/infos.html", {'user':user, 'identicals':identicals, 'password':password})
+        elif(str(new1)=="" and str(new2)==""):
+            user.last_name=myLastName
+            user.first_name=myName
+            user.email=myEmailAdress
+            user.save()
+            return redirect('/homepage')
+        else:
+            print("password aren't identicals")
+            identicals=False
+
+            return render(request, "accounts/infos.html", {'user':user, 'identicals':identicals})
+    return render(request, "accounts/infos.html", {'user':user, 'identicals':identicals})
