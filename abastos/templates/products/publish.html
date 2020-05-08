@@ -8,11 +8,24 @@
       <h1>Add a new product here</h1>
 
       <h2 style="margin-bottom: 3%;"> What product do you want to add ? </h2>
-      <form action="/products/publish/" method="post" enctype="multipart/form-data">
+
+      {% if isName == False %}
+      <h5 style="color:red;">The name format isn't correct</h5>
+      {% endif %}
+      {% if isUrl == False %}
+      <h5 style="color:red;">The url format isn't correct</h5>
+      {% endif %}
+
+
+      <form method="post" enctype="multipart/form-data">
+        <input type="hidden" name="length" value=8>
         {% csrf_token %}
-        {{ form }}
-        <br />
-        <input style="font-size: 25px;  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color: lightblue; color:white; margin-top:3%;" type="submit" value="Add a new product" />
+
+        <label ><b>Name:</b></label>
+        <input name="name" style="margin-top:1%;margin-bottom:1%;" type="text"  />
+        <label><b>Url:</b> </label>
+        <input name="url" style="margin-top:1%;margin-bottom:1%;" type="text"  /><br>
+        <input style="font-size: 25px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color:lightblue; color:white;" type="submit" value="Add a new product" />
       </form>
 
 

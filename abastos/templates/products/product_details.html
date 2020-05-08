@@ -11,6 +11,12 @@
           <img style="height:30px;" src="{{product.url}}"/> {{product.name}}
       </div>
       <h2 style="margin-bottom:2%;"> Do you want to make changes ? </h2>
+      {% if isName == False %}
+      <h5 style="color:red;">The name format isn't correct</h5>
+      {% endif %}
+      {% if isUrl == False %}
+      <h5 style="color:red;">The url format isn't correct</h5>
+      {% endif %}
       <form action="{% url 'products:product_details' slug=product.name %}" method="post" enctype="multipart/form-data">
         <input type="hidden" name="length" value=8>
         {% csrf_token %}
