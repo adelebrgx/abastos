@@ -14,6 +14,15 @@
       </div>
 
       <h2 style="margin-bottom:2%;"> Do you want to make changes ? </h2>
+      {% if isName == False %}
+      <h5 style="color:red;">The name format isn't correct</h5>
+      {% endif %}
+      {% if isLat == False %}
+      <h5 style="color:red;">The north coordinate's format isn't correct</h5>
+      {% endif %}
+      {% if isLong == False %}
+      <h5 style="color:red;">The east coordinate's format isn't correct</h5>
+      {% endif %}
       <form action="{% url 'locations:location_details' slug=location.slug %}" method="post" enctype="multipart/form-data">
         <input type="hidden" name="length" value=8>
         {% csrf_token %}

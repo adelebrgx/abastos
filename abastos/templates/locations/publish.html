@@ -8,7 +8,17 @@
       <h1>Add a new place here:</h1>
 
 
+
       <h2 style="margin-bottom: 3%;"> What location do you want to add? </h2>
+      {% if isName == False %}
+      <h5 style="color:red;">The name format isn't correct</h5>
+      {% endif %}
+      {% if isLat == False %}
+      <h5 style="color:red;">The north coordinate's format isn't correct</h5>
+      {% endif %}
+      {% if isLong == False %}
+      <h5 style="color:red;">The east coordinate's format isn't correct</h5>
+      {% endif %}
       <form action="/locations/publish/" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
