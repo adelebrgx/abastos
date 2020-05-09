@@ -17,6 +17,9 @@
       {% if isUrl == False %}
       <h5 style="color:red;">The url format isn't correct</h5>
       {% endif %}
+      {% if notAlreadyExists == False %}
+      <h5 style="color:red;">This product already exists</h5>
+      {% endif %}
       <form action="{% url 'products:product_details' slug=product.name %}" method="post" enctype="multipart/form-data">
         <input type="hidden" name="length" value=8>
         {% csrf_token %}
