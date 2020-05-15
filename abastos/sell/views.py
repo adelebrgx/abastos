@@ -100,8 +100,8 @@ def publish(request):
 
 
 
-
-            return render(request, 'sell/selllist.html', {'sells':sells, 'sellpairs': sellPairs,'user':request.user})
+            type="product"
+            return render(request, 'sell/selllist.html', {'sells':sells, 'sellpairs': sellPairs,'user':request.user,'type':type})
 
     return render(request, 'sell/publish.html', {'user':request.user, 'products': products, 'locations':locations})
 

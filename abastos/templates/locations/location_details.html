@@ -12,7 +12,7 @@
         <b style="color: #ff5f3b;">North coordinate:</b> {{location.north_coordinate}} <br />
         <b style="color: #ff5f3b;">East coordinate:</b> {{location.east_coordinate}} <br />
       </div>
-
+      {% if user == location.owner %}
       <h2 style="margin-bottom:2%;"> Do you want to make changes ? </h2>
       {% if isName == False %}
       <h5 style="color:red;">The name format isn't correct</h5>
@@ -35,7 +35,7 @@
         <input type="submit"  style="font-size: 25px; margin-top: 3%; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color:orange; color:white;" value="Modify" />
         </form>
 
-
+        {% endif %}
 
 
 
