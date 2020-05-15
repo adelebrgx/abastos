@@ -7,32 +7,29 @@
 
       <h1>Details of the message</h1>
 
-      <div id="actual_message" style=" box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color: white; margin-left:20%; margin-right:20%;  border:2px; margin-bottom: 1%;" >
-          <p style=" color: #ff5f3b; padding-top: 2%;text-align:left; font-size:30px; padding-left: 2%"><b>{{message.author}}</b></p>
-          <p style=" text-align:left; padding-left: 2%; font-size: 10px;">{{message.date}}</p><br />
-
-          <p style="text-align:left; padding-left: 2%; font-size: 19px;"><b>Subject:</b> {{message.head}}</p>
-          <hr style="margin-left:10px; margin-right: 10px; margin-top: 2%;">
-
-          <p style="text-align:left; padding-left: 2%; font-size:14px; padding-top: 2%; padding-bottom: 2%;">
-            {{message.content}}
-          </p>
-      </div>
 
       {% for mess in messages %}
-      {% if mess.id != message.id %}
+
       <div id="actual_message" style=" box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color: white; margin-left:20%; margin-right:20%;  border:2px; margin-bottom: 1%;" >
+          {% if mess.id == message.id %}
           <p style=" color: #ff5f3b; padding-top: 2%;text-align:left; font-size:30px; padding-left: 2%"><b>{{mess.author}}</b></p>
+          <p style=" text-align:left; padding-left: 2%; font-size: 10px;"><b>{{mess.date}}<b></p><br />
+
+          <p style="text-align:left; padding-left: 2%; font-size: 19px;"><b>Subject: {{mess.head}}<b></p>
+          {% else  %}
+          <p style=" color: #ff5f3b; padding-top: 2%;text-align:left; font-size:30px; padding-left: 2%">{{mess.author}}</p>
           <p style=" text-align:left; padding-left: 2%; font-size: 10px;">{{mess.date}}</p><br />
 
-          <p style="text-align:left; padding-left: 2%; font-size: 19px;"><b>Subject:</b> {{mess.head}}</p>
+          <p style="text-align:left; padding-left: 2%; font-size: 19px;">Subject: {{mess.head}}</p>
+
+          {% endif %}
           <hr style="margin-left:10px; margin-right: 10px; margin-top: 2%;">
 
           <p style="text-align:left; padding-left: 2%; font-size:14px; padding-top: 2%; padding-bottom: 2%;">
             {{mess.content}}
           </p>
       </div>
-      {% endif %}
+
       {% endfor %}
 
 
@@ -53,8 +50,9 @@
         </form>
       </div>
 
-
+      {% if user != message.author%}
       <button id="send" onclick="send('{{message.head}}')" style="font-size: 25px; margin-top: 3%; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color:lightblue; font-family: 'Montserrat', sans-serif;color:white;">Answer</button>
+      {% endif %}
 <script>
 
 function send(val){
