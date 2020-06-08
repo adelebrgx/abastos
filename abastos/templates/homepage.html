@@ -17,8 +17,55 @@
             <h3> <img style="padding-right:20px" height=32 src="https://img.icons8.com/wired/64/000000/speech-bubble.png"/>Publish ads to inform people what you're selling.</h3>
           </div>
 
-          <img src={% static 'map.png' %} height=450 />
+          {% for location in locations %}
+            <div ></div>
+
+          {% endfor %}
+
+          <div id='map' style='height: 300px; width:1000px;'></div>
         </div>
 
       </div>
+
+      <script>
+      mapboxgl.accessToken = '{{token}}';
+      var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [2.34, 48.85],
+      zoom: 4,
+      });
+
+      var locations_list = [
+         {% for loc in locations %}
+             {% if not forloop.first %},{% endif %}
+             {
+                 name: "{{ loc.name }}",
+                 slug: "{{ loc.slug }}",
+                 north: "{{ loc.north_coordinate }}",
+                 east: "{{loc.east_coordinate}}"
+             }
+         {% endfor %}
+       ];
+
+    var index=0;
+    while(index<locations_list.length){
+      loc=locations_list[index];
+      new mapboxgl.Marker()
+      .setLngLat([loc.east, loc.north])
+      .addTo(map);
+      index++;
+      }
+
+
+
+ //console.log(locations_list[0]);
+ //console.log(locations_list.length);
+
+
+
+
+
+
+      </script>
 {% endblock %}
