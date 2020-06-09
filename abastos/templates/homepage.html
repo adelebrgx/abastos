@@ -54,6 +54,7 @@
            {
                product: "{{ sellpair.product }}",
                quantity: "{{ sellpair.quantity }}",
+               slug:"{{ sellpair.slug }}",
                location: "{{sellpair.sell.location}}"
            }
        {% endfor %}
@@ -61,20 +62,20 @@
 
     var index=0;
     while(index<locations_list.length){
-      var content="<h3>";
+      var content="";
       loc=locations_list[index];
 
       for (let i = 0; i < sell_list.length; i++) {
             var sell=sell_list[i];
             if (sell.location === loc.name){
-              content+=sell.product+" ("+sell.quantity+")"+"<br>";
+              content+="<a class='product' href='/sell/"+sell.slug+"'>"+sell.product+"("+sell.quantity+") </a><br>";
             }
         }
       var link="/locations/"+loc.slug;
       var acontent="<a class='visit' href='"+link+"'> Visit store </a>";
       console.log(acontent)
 
-      content+="</h3>";
+
       content+=acontent;
       console.log(content);
 
@@ -90,7 +91,7 @@
 
 
  //console.log(locations_list[0]);
- //console.log(sell_list);
+ console.log(sell_list);
 
 
 

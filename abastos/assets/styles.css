@@ -21,6 +21,12 @@ background-color: white;
   color: orange;
   text-decoration:none;
 }
+
+.product {
+  color: darkgrey;
+  text-decoration:none;
+}
+
 .text{
   text-align: left;
   font-size: 13px;

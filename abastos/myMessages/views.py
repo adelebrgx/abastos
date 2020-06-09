@@ -10,13 +10,13 @@ from django.http import HttpResponse
 def messages_list_received_view(request):
     user=request.user
     type="received"
-    messages=myMessage.objects.filter(recipient=user)
+    messages=myMessage.objects.filter(recipient=user).order_by('-date')
     return render(request,"myMessages/myMessageslist.html", {'messages':messages,'user':user,'type':type})
 
 def messages_list_sent_view(request):
     user=request.user
     type="sent"
-    messages=myMessage.objects.filter(author=user)
+    messages=myMessage.objects.filter(author=user).order_by('-date')
     return render(request,"myMessages/myMessageslist.html", {'user':user,'messages':messages,'type':type})
 
 def message_details_view(request,slug):

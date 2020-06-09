@@ -138,7 +138,8 @@ def sell_details(request, slug):
         sell_associated.save()
         #sell.product=new_product
 
-        return render(request, 'sell/selllist.html', {'sells':sells, 'sellpairs': sellPairs,'user':request.user})
+        type="product"
+        return render(request, 'sell/selllist.html', {'sells':sells, 'sellpairs': sellPairs,'user':request.user,'type':type})
     #print(sell)
     return render(request, 'sell/sell_details.html',  {'user':user, 'sellPair':sell, 'locations':locations, 'products': products})
 
