@@ -2,19 +2,19 @@
 
 {% block content %}
 {% load static from staticfiles %}
-      <div class="container" style="margin-top:2px;">
+      <div class="container" style="margin-top:1px;">
         <h1>AbastoSimple</h1>
 
-        <div class="text">
-          <h3 style="color:#ff5f3b; font-size:25px"><b>Stock more easily thanks to this app.</b></h3>
+        <div class="text" >
+          <h3 style="color:#ff5f3b; "><b>Stock more easily thanks to this app.</b></h3>
           <div class="element">
-            <h3><img style="padding-right:20px" height=32 src="https://img.icons8.com/wired/64/000000/cursor.png"/>On the map, see where to shop.</h3>
+            <h3><img style="padding-right:20px" height=25 src="https://img.icons8.com/wired/64/000000/cursor.png"/>On the map, see where to shop.</h3>
           </div>
           <div class="element">
-            <h3> <img style="padding-right:20px" height=32 src="https://img.icons8.com/wired/64/000000/search.png"/>Click on a location for details.</h3>
+            <h3> <img style="padding-right:20px" height=25 src="https://img.icons8.com/wired/64/000000/search.png"/>Click on a location for details.</h3>
           </div>
           <div class="element">
-            <h3> <img style="padding-right:20px" height=32 src="https://img.icons8.com/wired/64/000000/speech-bubble.png"/>Publish ads to inform people what you're selling.</h3>
+            <h3> <img style="padding-right:20px" height=25 src="https://img.icons8.com/wired/64/000000/speech-bubble.png"/>Publish ads to inform people what you're selling.</h3>
           </div>
 
           {% for location in locations %}
@@ -48,19 +48,49 @@
          {% endfor %}
        ];
 
+    var sell_list= [
+       {% for sellpair in sellpairs %}
+           {% if not forloop.first %},{% endif %}
+           {
+               product: "{{ sellpair.product }}",
+               quantity: "{{ sellpair.quantity }}",
+               location: "{{sellpair.sell.location}}"
+           }
+       {% endfor %}
+     ];
+
     var index=0;
     while(index<locations_list.length){
+      var content="<h3>";
       loc=locations_list[index];
+
+      for (let i = 0; i < sell_list.length; i++) {
+            var sell=sell_list[i];
+            if (sell.location === loc.name){
+              content+=sell.product+" ("+sell.quantity+")"+"<br>";
+            }
+        }
+      var link="/locations/"+loc.slug;
+      var acontent="<a class='visit' href='"+link+"'> Visit store </a>";
+      console.log(acontent)
+
+      content+="</h3>";
+      content+=acontent;
+      console.log(content);
+
+
       new mapboxgl.Marker()
       .setLngLat([loc.east, loc.north])
-      .addTo(map);
+      .addTo(map)
+      .setPopup(new mapboxgl.Popup().setHTML(content));
+
       index++;
       }
 
 
 
  //console.log(locations_list[0]);
- //console.log(locations_list.length);
+ //console.log(sell_list);
 
 
 

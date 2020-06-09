@@ -17,9 +17,13 @@ margin-right:5%;
 background-color: white;
 }
 
+.visit {
+  color: orange;
+  text-decoration:none;
+}
 .text{
   text-align: left;
-  font-size: 18px;
+  font-size: 13px;
   padding-left:15%;
   padding-right: 15%;
 }
