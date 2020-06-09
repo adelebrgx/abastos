@@ -33,9 +33,9 @@ def publish(request):
             if(correct_name(name)==False):
                 isName=False
             if(correct_lat(north)==False):
-                isLong=False
-            if(correct_long(east)==False):
                 isLat=False
+            if(correct_long(east)==False):
+                isLong=False
             if(isLat==True and isLong==True and isName==True):
                 location=Location.objects.create(name=name, north_coordinate=north, east_coordinate=east, owner=request.user, slug=slug)
                 location.save()
@@ -64,9 +64,9 @@ def location_details(request, slug):
         if(correct_name(new_name)==False):
             isName=False
         if(correct_lat(new_nc)==False):
-            isLong=False
-        if(correct_long(new_ec)==False):
             isLat=False
+        if(correct_long(new_ec)==False):
+            isLong=False
         if(isLat==True and isLong==True and isName==True):
             location.name=new_name
             location.north_coordinate=new_nc
