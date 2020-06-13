@@ -72,7 +72,7 @@ def new_message_view(request):
         print(mySlug)
         message=myMessage.objects.create(head=myHead, content=myContent, author=myAuthor, recipient=myRecipient, slug=mySlug)
         message.conv_id=message.id
-        mySlug=str(myHeadSlug)+"-"+str(myAuthor)+"-"+str(myRecipient)+"-"+str(message.id)
+        message.slug=str(myHeadSlug)+"-"+str(myAuthor)+"-"+str(myRecipient)+"-"+str(message.id)
         message.save()
         type="received"
         mymessages=myMessage.objects.filter(recipient=myuser)

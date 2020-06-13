@@ -132,6 +132,7 @@ def sell_details(request, slug):
         #print(sell.sell.location)
         sell.product=new_product
         sell.quantity=new_quantity
+        sell.slug=str(new_product)+"-"+str(new_quantity)
         sell_associated=sell.sell
         sell_associated.location=new_location
         sell.save()

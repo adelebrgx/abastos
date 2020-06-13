@@ -29,6 +29,11 @@
 
             <input type="submit" style="font-size: 15px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color: lightgreen; color:white; margin-top:3%;" value="Go" />
           </form>
+          {% if size == 0 %}
+
+            <h5 style="color:red;"> Sorry we don't have this product available on our platform</h5> 
+
+          {% endif %}
           <button type="button"  onclick="reset()" style="font-size: 15px; font-family: 'Montserrat', sans-serif; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color: orange; color:white; margin-top:1%;">Reset</button>
           </div><br>
 
@@ -48,6 +53,22 @@
       zoom: 4,
       });
 
+
+      var sell_list= [
+         {% for sellpair in sellpairs %}
+             {% if not forloop.first %},{% endif %}
+             {
+                 product: "{{ sellpair.product }}",
+                 quantity: "{{ sellpair.quantity }}",
+                 slug:"{{ sellpair.slug }}",
+                 location: "{{sellpair.sell.location}}"
+             }
+         {% endfor %}
+       ];
+
+
+      if ( '{{type}}' == "none"){
+
       var locations_list = [
          {% for loc in locations %}
              {% if not forloop.first %},{% endif %}
@@ -60,17 +81,7 @@
          {% endfor %}
        ];
 
-    var sell_list= [
-       {% for sellpair in sellpairs %}
-           {% if not forloop.first %},{% endif %}
-           {
-               product: "{{ sellpair.product }}",
-               quantity: "{{ sellpair.quantity }}",
-               slug:"{{ sellpair.slug }}",
-               location: "{{sellpair.sell.location}}"
-           }
-       {% endfor %}
-     ];
+
 
     var index=0;
     while(index<locations_list.length){
@@ -99,6 +110,20 @@
 
       index++;
       }
+
+    }
+    else {
+        console.log(sell_list);
+
+
+
+
+
+
+
+
+
+    }
 
 
 
