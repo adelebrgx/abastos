@@ -2,25 +2,37 @@
 
 {% block content %}
 {% load static from staticfiles %}
-      <div class="container" style="margin-top:1px;">
-        <h1>AbastoSimple</h1>
+      <div class="container" >
+        <h1 style="font-size: 40px;">AbastoSimple</h1>
 
         <div class="text" >
-          <h3 style="color:#ff5f3b; "><b>Stock more easily thanks to this app.</b></h3>
           <div class="element">
-            <h3><img style="padding-right:20px" height=25 src="https://img.icons8.com/wired/64/000000/cursor.png"/>On the map, see where to shop.</h3>
+            <h5><img style="padding-right:15px" height=15 src="https://img.icons8.com/wired/64/000000/cursor.png"/>On the map, see where to shop.</h5>
           </div>
           <div class="element">
-            <h3> <img style="padding-right:20px" height=25 src="https://img.icons8.com/wired/64/000000/search.png"/>Click on a location for details.</h3>
+            <h5> <img style="padding-right:15px" height=15 src="https://img.icons8.com/wired/64/000000/search.png"/>Click on a location for details.</h5>
           </div>
           <div class="element">
-            <h3> <img style="padding-right:20px" height=25 src="https://img.icons8.com/wired/64/000000/speech-bubble.png"/>Publish ads to inform people what you're selling.</h3>
+            <h5> <img style="padding-right:15px" height=15 src="https://img.icons8.com/wired/64/000000/speech-bubble.png"/>Publish ads to inform people what you're selling.</h5>
           </div>
 
-          {% for location in locations %}
-            <div ></div>
+          <div style="text-align:center">
+          <form style="font-size: 15px;"   action="javascript:getslug(this)"  method="post" enctype="multipart/form-data">
+            <input type="hidden" name="length" value=8>
+            {% csrf_token %}
+            <label>Look for one product:</label>
+            <select id="cars" style="font-family: 'Montserrat', sans-serif;" name="product">
+              {% for product in products %}
+                <option value="{{product.name}}">{{product.name}}</option>
+              {% endfor %}
+            </select>
 
-          {% endfor %}
+            <input type="submit" style="font-size: 15px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color: lightgreen; color:white; margin-top:3%;" value="Go" />
+          </form>
+          <button type="button"  onclick="reset()" style="font-size: 15px; font-family: 'Montserrat', sans-serif; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); background-color: orange; color:white; margin-top:1%;">Reset</button>
+          </div><br>
+
+
 
           <div id='map' style='height: 300px; width:1000px;'></div>
         </div>
@@ -93,7 +105,19 @@
  //console.log(locations_list[0]);
  console.log(sell_list);
 
+    function getslug(){
+      slug=document.getElementById("cars").value;
+      window.location.href="/byproduct/"+slug;
 
+    }
+
+    function reset(){
+        //window.location.href="/homepage";
+        slug=document.getElementById("cars").value;
+        ref="/homepage/byproduct/"+slug;
+        console.log(ref);
+
+    }
 
 
 
